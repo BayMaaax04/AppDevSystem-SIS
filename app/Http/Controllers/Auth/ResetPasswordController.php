@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\ResetsPasswords;
 
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Str;
 use App\User;
 
 class ResetPasswordController extends Controller
@@ -25,6 +26,16 @@ class ResetPasswordController extends Controller
     */
 
     use ResetsPasswords;
+
+    protected function resetPassword($user, $password)
+    {
+        $user->forceFill([
+            'password' => bcrypt($password),
+            'remember_token' => Str::random(60),
+        ])->save();
+
+        //$this->guard()->login($user);
+    }
 
     public function getPassword($token) {
 
