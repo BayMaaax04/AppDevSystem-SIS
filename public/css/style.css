@@ -1,0 +1,13 @@
+:root {
+    --bg-light: #f2f2f2;
+    --text-light: black;
+    --text-light: #292929;
+}
+
+/* body {
+    background: green;
+} */
+
+.header-bg {
+    background-color: white;
+}
