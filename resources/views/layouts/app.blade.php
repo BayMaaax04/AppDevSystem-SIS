@@ -70,8 +70,8 @@
 
 
 
-                              <div x-show="dropdownOpen" class="absolute right-0 mt-1 w-80 pb-2  bg-white  dark:bg-gray-500 rounded-lg shadow-xl divide-y-1 divide-gray-200 ">
-                                <div class="px-4 py-3 bg-red-900 flex ">
+                              <div x-show="dropdownOpen" class="absolute right-0 mt-1 w-80 pb-2  bg-white dark:bg-gray-secondary-dark rounded-lg shadow-xl divide-y-1 divide-gray-200 ">
+                                <div class="px-4 py-3 bg-red-accent flex ">
                                   <div class="block h-20 w-20 rounded-full overflow-hidden focus:outline-none focus:border-white ">
                                     <img class="h-full w-full object-cover " src="https://images.unsplash.com/photo-1558898479-33c0057a5d12?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Your avatar">
                                   </div>
@@ -83,10 +83,10 @@
                                   </div>
                                 </div>
 
-                                <div class="">
-                                  <a href="" class="block px-4 py-3 text-gray-800 dark:text-white dark:hover:font-bold hover:text-red-800 hover:font-bold transition ease-in ">Account Settings</a>
+                                <div class="px-2 py-1">
+                                  <a href="" class="block px-4 py-3 text-gray-800 dark:text-white  hover:text-red-800 dark:hover:text-red-800 transition ease-in ">Account Settings</a>
 
-                                  <a href="{{ route('logout') }}" class="block px-4 py-3 text-gray-800 dark:text-white hover:text-red-800 hover:font-bold transition ease-in" onclick="event.preventDefault();
+                                  <a href="{{ route('logout') }}" class="block px-4 py-3 text-gray-800 dark:text-white  hover:text-red-800 dark:hover:text-red-800 transition ease-in" onclick="event.preventDefault();
                                   document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
                                   
                                   <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
