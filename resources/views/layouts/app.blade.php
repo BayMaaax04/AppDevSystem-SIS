@@ -42,7 +42,7 @@
 <body class="bg-gray-100 dark:bg-gray-primary-dark antialiased leading-none font-sans" >
     <div id="app">
       
-        <header class="dark:bg-gray-secondary-dark bg-white lg:px-20 px-6 flex flex-wrap items-center lg:py-1 py-2 sticky">
+        <header class="dark:bg-gray-tertiary-dark bg-white lg:px-20 px-6 flex flex-wrap items-center lg:py-1 py-2 sticky">
 
               <label for="menu-toggle" class="cursor-pointer lg:hidden block mr-2">
                 <svg class="w-6 h-6 fill-current text-gray-900 dark:text-white"  stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
@@ -103,7 +103,7 @@
                     />
                   </svg>
 
-                  <svg x-bind:class="{ 'hidden': dark }" role="presentation" aria-hidden="true" class="w-6 h-6 fill-current text-white dark:active:text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                  <svg x-bind:class="{ 'hidden': dark }" role="presentation" aria-hidden="true" class="w-6 h-6 fill-current text-gray-400 dark:active:text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                 </button>
 
                 <div x-data="{ dropdownOpen: false }" class="lg:relative">
