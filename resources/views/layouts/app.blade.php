@@ -89,7 +89,7 @@
                     x-show="dark"
                     width="24"
                     height="24"
-                    class="fill-current dark:text-gray-50 transform -rotate-90 "
+                    class="fill-current dark:text-gray-50 active:text-gray-500 transform -rotate-90 "
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
