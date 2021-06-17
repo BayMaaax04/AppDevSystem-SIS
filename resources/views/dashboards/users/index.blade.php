@@ -54,23 +54,25 @@
                         <div class="w-full">
                             <ul class="lg:flex item-center text-sm text-gray-800 dark:text-white flex-wrap flex-row ">
                                 <li>
-                                    <a class="lg:p-2 py-1 lg:px-2 px-0 block border-b-2 border-transparent dark:hover:border-white hover:border-red-accent hover:font-bold active hover:text-gray-800 text-gray-800 border-red-accent cursor-pointer" onclick="changeAtiveTab(event,'tab-info')">Basic Information</a>
+                                    <a class="lg:p-2 py-1 lg:px-2 px-0 block border-b-2 border-transparent hover:border-red-accent hover:font-bold active hover:text-gray-800 text-gray-800 border-red-accent
+                                    dark:hover:border-red-accent dark:text-gray-50 dark:hover:text-gray-50 cursor-pointer" onclick="changeAtiveTab(event,'tab-info')">Basic Information</a>
                                 </li>
                                 <li>
-                                    <a class="lg:p-2 py-1 lg:px-2 px-0 block border-b-2 border-transparent  dark:hover:border-white hover:border-red-accent hover:text-gray-800 text-gray-500 bg-white cursor-pointer" onclick="changeAtiveTab(event,'tab-address')">Address</a>
+                                    <a class="lg:p-2 py-1 lg:px-2 px-0 block border-b-2 border-transparent hover:border-red-accent hover:text-gray-800 text-gray-500 cursor-pointer dark:hover:border-red-accent dark:text-gray-500 dark:hover:text-gray-50" onclick="changeAtiveTab(event,'tab-address')">Address</a>
                                 </li>
                                 <li>
-                                    <a class="lg:p-2 py-1 lg:px-2 px-0 block border-b-2 border-transparent  dark:hover:border-white hover:border-red-accent hover:text-gray-800 text-gray-500 bg-white cursor-pointer" onclick="changeAtiveTab(event,'tab-guardian')">Guardian</a>
+                                    <a class="lg:p-2 py-1 lg:px-2 px-0 block border-b-2 border-transparent hover:border-red-accent hover:text-gray-800 text-gray-500  cursor-pointer
+                                    dark:hover:border-red-accent dark:text-gray-500 dark:hover:text-gray-50" " onclick="changeAtiveTab(event,'tab-guardian')">Guardian</a>
                                 </li>
                                 <li>
-                                    <a class="lg:p-2 py-1 lg:px-2 px-0 block border-b-2 border-transparent  dark:hover:border-white hover:border-red-accent hover:text-gray-800 text-gray-500 bg-white cursor-pointer" onclick="changeAtiveTab(event,'tab-educ')">Education</a>
+                                    <a class="lg:p-2 py-1 lg:px-2 px-0 block border-b-2 border-transparent hover:border-red-accent hover:text-gray-800 text-gray-500  cursor-pointer dark:hover:border-red-accent dark:text-gray-500 dark:hover:text-gray-50" " onclick="changeAtiveTab(event,'tab-educ')">Education</a>
                                 </li>
                             </ul>  
                         </div>
                         <div class="lg:p-5 border-t border-gray-400 dark:border-dark-50  "></div>
 
                         {{-- Start Tabs --}}
-                        <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
+                        <div class="relative flex flex-col min-w-0 break-words bg-white dark:bg-transparent text-gray-700 dark:text-gray-50 w-full mb-6 shadow-lg rounded">
                             <div class="px-4 py-5 flex-auto">
                                 <div class="tab-content tab-space">
                                 <div class="block" id="tab-info">
