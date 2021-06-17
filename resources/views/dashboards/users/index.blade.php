@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<main class="sm:container sm:mx-auto sm:mt-2">
+<main class="sm:container sm:mx-auto sm:mt-2 text-sm">
     <div class="w-full sm:px-30">
 
         @if (session('status'))
@@ -21,8 +21,6 @@
                         <div class="lg:block flex text-center flex-col items-center p-5">
                             <div class="relative lg:h-40 lg:w-40 md:h-36 md:w-36 h-28 w-28 rounded-full border-1 overflow-hidden border-gray-400 focus:outline-none focus:border-white">
                                 <img alt="" class="h-full w-full object-cover" src="https://icewall-laravel.left4code.com/dist/images/profile-10.jpg">
-                                
-
                             </div>
                             
                             <input type="file" name="profile-pic" id="profile-pic" class="hidden"/>
@@ -54,7 +52,7 @@
                         <div class="w-full">
                             <ul class="lg:flex item-center text-sm text-gray-800 dark:text-white flex-wrap flex-row ">
                                 <li>
-                                    <a class="lg:p-2 py-1 lg:px-2 px-0 block border-b-2 border-transparent hover:border-red-accent hover:font-bold active hover:text-gray-800 text-gray-800 border-red-accent
+                                    <a class="lg:p-2 py-1 lg:px-2 px-0 block border-b-2 border-transparent hover:border-red-accent hover:font-bold hover:text-gray-800 text-gray-800 border-red-accent
                                     dark:hover:border-red-accent dark:text-gray-50 dark:hover:text-gray-50 cursor-pointer" onclick="changeAtiveTab(event,'tab-info')">Basic Information</a>
                                 </li>
                                 <li>

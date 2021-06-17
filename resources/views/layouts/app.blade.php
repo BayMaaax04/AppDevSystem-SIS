@@ -10,30 +10,22 @@
     <title>{{ config('app.name', 'PUP Student Portal') }}</title>
 
     <!-- Scripts -->
-    <script>
-      document.addEventListener('contextmenu', function(e) {
-        e.preventDefault();
-      });
-
-
-      if (localStorage.theme === 'dark' || (!'theme' in localStorage && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-          document.querySelector('html').classList.add('dark')
-      } else if (localStorage.theme === 'dark') {
-          document.querySelector('html').classList.add('dark')
-      }
-
-    </script>
 
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/scripts.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.0.1/dist/alpine.js" defer></script>
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <link href="{{ url('css/style.css') }}" rel="stylesheet">
-
-
+    <link rel="stylesheet" href="{{ asset('plugins/ijaboCropTool/ijaboCropTool.min.css')}}">
     <style>
       #menu-toggle:checked + #menu {
         display: block;
+      }
+
+      .active {
+        border-bottom: 2px solid #800000; 
+        font-weight: 900;
       }
     </style>
 
@@ -42,7 +34,7 @@
 <body class="bg-gray-100 dark:bg-gray-primary-dark antialiased leading-none font-sans" >
     <div id="app">
       
-        <header class="dark:bg-gray-tertiary-dark bg-white lg:px-20 px-6 flex flex-wrap items-center lg:py-1 py-2 sticky">
+        <header class="dark:bg-gray-tertiary-dark bg-white lg:px-20 px-6 flex flex-wrap items-center lg:py-0 py-2 sticky">
 
               <label for="menu-toggle" class="cursor-pointer lg:hidden block mr-2">
                 <svg class="w-6 h-6 fill-current text-gray-900 dark:text-white"  stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
@@ -64,18 +56,18 @@
 
                 @else
 
-                  <ul class="lg:flex item-center justify-between text-base text-gray-800 dark:text-white pt-4 lg:pt-0">
+                  <ul class="lg:flex item-center justify-between text-base text-gray-800 dark:text-white pt-4 lg:pt-0" id="navbar">
                     <li>
-                      <a href="/" class="lg:p-4 py-3 px-0 block border-t-2 border-transparent hover:border-red-accent">Home</a>
+                      <a href="/" class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-red-accent active" id="nav-links">{{ __('Home') }}</a>
                     </li>
                     <li>
-                      <a href="" class="lg:p-4 py-3 px-0 block border-t-2 border-transparent hover:border-red-accent">Registration</a>
+                      <a href="" class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-red-accent" id="nav-links">{{ __('Registration') }}</a>
                     </li>
                     <li>
-                      <a href="" class="lg:p-4 py-3 px-0 block border-t-2 border-transparent hover:border-red-accent">Grading</a>
+                      <a href="" class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-red-accent" id="nav-links">{{ __('Grading') }}</a>
                     </li>
                     <li>
-                      <a href="" class="lg:p-4 py-3 px-0 block border-t-2 border-transparent hover:border-red-accent">Schedule</a>
+                      <a href="" class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-red-accent" id="nav-links">{{ __('Schedule') }}</a>
                     </li>
                   </ul>  
                   
@@ -139,36 +131,16 @@
                   </div>  
                 </div>
               </div>
- 
-
-
-
-              @endguest
+               @endguest
         </header>
 
 
         @yield('content')
     </div>
 </body>
-{{-- @push('scripts') --}}
-<script>
+@push('scripts')
 
-
-    document.getElementById("switchTheme").addEventListener("click", function() {
-        let htmlClasses = document.querySelector("html").classList;
-        if (localStorage.theme == "dark") {
-            htmlClasses.remove("dark");
-            localStorage.removeItem("theme");
-        } else {
-            htmlClasses.add("dark");
-            localStorage.theme = "dark";
-        }
-    });
-
-
-
-</script>
-
-
-{{-- @endpush --}}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+  <script src="{{ asset('plugins/ijaboCropTool/ijaboCropTool.min.js') }}"></script> 
+@endpush
 </html>
