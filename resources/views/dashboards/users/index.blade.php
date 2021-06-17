@@ -22,19 +22,17 @@
                             <div class="lg:h-40 lg:w-40 md:h-36 md:w-36 h-28 w-28 rounded-full border-1 overflow-hidden border-gray-400 focus:outline-none focus:border-white ">
                                 <img alt="Profile" src="{{ Auth::user()->picture}}" class="h-full w-full object-cover" >
                             </div>
-                            <input type="file" name="profile-pic" id="profile-pic" class="hidden"/>
-                            <a href="javascript:void(0)" id="change-picture-btn" class="w-9 h-9 transition-colors duration-200 rounded-xl">
-                                {{-- camera --}}
-                                {{-- <svg class="w-9 h-9 lg:transform lg:-translate-y-10 lg:translate-x-36 stroke-current text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg> --}}
 
-                                <svg class="lg:w-12 lg:h-12 w:9 h:9 lg:transform lg:-translate-y-10 lg:translate-x-28 stroke-current text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
-                            </a>  
-
-
-                            <div class="flex-1">
-                                <div class="font-medium text-base ">{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</div>
+                            <div class="flex-1 pt-2">
+                                <div class="font-medium text-base ">{{ Auth::user()->lastname }}, {{ Auth::user()->firstname }} {{ Auth::user()->middlename[0] }}.</div>
                                 <div class="text-gray-600 ">BSIT 3-2</div>
                             </div>
+
+                            <input type="file" name="profile-pic" id="profile-pic" class="hidden pointer-events-none disabled cursor-default"/>
+
+                            <a href="javascript:void(0)" id="change-picture-btn" class="w-9 h-9 transition-colors duration-200 rounded-xl">
+                                <svg class="lg:w-11 lg:h-11 w-9 h-9 transform lg:-translate-y-52 -translate-y-40 md:-translate-y-44 lg:translate-x-32 md:translate-x-15 translate-x-10 stroke-current bg-red-accent hover:bg-gray-100 text-gray-200 hover:text-red-accent p-2 rounded-full " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                            </a>  
                         </div>
 
                         <div class=" border-t border-gray-400 dark:border-dark-50  w-full">
