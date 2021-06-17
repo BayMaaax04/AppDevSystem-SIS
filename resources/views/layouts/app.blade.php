@@ -113,9 +113,9 @@
                       </div>
 
                       <div class="profile-detail self-center text-white pl-4 ">
-                        <h4 class="text-xs py-1">signed in as:</h4>
-                        <span class="py-2 font-bold uppercase">{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</span>
-                        <h5 class="text-xs italic">{{ Auth::user()->email }}</h5>
+                        <h4 class="text-xs pb-2">signed in as:</h4>
+                        <span class="py-2 font-bold text-md uppercase">{{ Auth::user()->lastname }}, {{ Auth::user()->firstname }} {{ Auth::user()->middlename[0] }}.</span>
+                        <p class="text-xs italic">{{ Auth::user()->email }}</p>
                       </div>
                     </div>
 
