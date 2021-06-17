@@ -31,10 +31,10 @@
 
 </head>
 
-<body class="bg-gray-100 dark:bg-gray-primary-dark antialiased leading-none font-sans" >
+<body class="bg-gray-100 dark:bg-gray-tertiary-dark antialiased leading-none font-sans" >
     <div id="app">
       
-        <header class="dark:bg-gray-tertiary-dark bg-white lg:px-20 px-6 flex flex-wrap items-center lg:py-0 py-2 sticky">
+        <header class="dark:bg-gray-secondary-dark bg-white lg:px-20 px-6 flex flex-wrap items-center lg:py-0 py-2 sticky">
 
               <label for="menu-toggle" class="cursor-pointer lg:hidden block mr-2">
                 <svg class="w-6 h-6 fill-current text-gray-900 dark:text-white"  stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>

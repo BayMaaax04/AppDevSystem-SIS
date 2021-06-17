@@ -12,12 +12,12 @@
 
         <section class="flex flex-col break-words">
             <div class="mx-20 my-2">
-                <h2 class="text-2xl font-medium mr-auto my-4 dark:text-gray-400">
+                <h2 class="text-lg uppercase font-bold mr-auto my-4 dark:text-gray-200">
                     Profile
                 </h2>
 
                 <div class="lg:flex block h-full justify-between">
-                    <div class="intro-y box mt-5 lg:mt-0 px-1 lg:pb-40 lg:flex-3 flex-2 lg:flex block items-center lg:flex-col bg-white dark:bg-gray-tertiary-dark rounded-md shadow-md border-t-4 border-red-accent lg:mr-5 dark:text-gray-50">
+                    <div class="intro-y box mt-5 lg:mt-0 px-1 lg:pb-40 lg:flex-3 flex-2 lg:flex block items-center lg:flex-col bg-white dark:bg-gray-primary-dark rounded-md shadow-md border-t-4 border-red-accent lg:mr-5 dark:text-gray-50">
                         <div class="lg:block flex text-center flex-col items-center p-5">
                             <div class="relative lg:h-40 lg:w-40 md:h-36 md:w-36 h-28 w-28 rounded-full border-1 overflow-hidden border-gray-400 focus:outline-none focus:border-white">
                                 <img alt="" class="h-full w-full object-cover" src="https://icewall-laravel.left4code.com/dist/images/profile-10.jpg">
@@ -48,7 +48,7 @@
                     </div>
 
                     {{-- Tab Links --}}
-                    <div class="flex-1 mt-5 lg:mt-0 p-2 block bg-white dark:bg-gray-tertiary-dark dark:text-gray-50 rounded-md shadow-md border-t-4 border-red-accent items-center flex-wrap"  id="tabs-id">
+                    <div class="flex-1 mt-5 lg:mt-0 p-2 block bg-white dark:bg-gray-primary-dark dark:text-gray-50 rounded-md shadow-md border-t-4 border-red-accent items-center flex-wrap"  id="tabs-id">
                         <div class="w-full">
                             <ul class="lg:flex item-center text-sm text-gray-800 dark:text-white flex-wrap flex-row ">
                                 <li>
