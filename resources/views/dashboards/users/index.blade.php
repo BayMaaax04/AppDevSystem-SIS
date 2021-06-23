@@ -17,7 +17,7 @@
                 </h2>
 
                 <div class="lg:flex block h-full justify-between">
-                    <div class="intro-y box mt-5 lg:mt-0 px-1 lg:pb-40 lg:flex-3 flex-2 lg:flex block items-center lg:flex-col bg-white dark:bg-gray-primary-dark rounded-md shadow-md border-t-4 border-red-accent lg:mr-5 dark:text-gray-50">
+                    <div class="intro-y box mt-5 lg:mt-0 px-8 lg:pb-40 lg:flex-3 flex-2 lg:flex block items-center lg:flex-col bg-white dark:bg-gray-primary-dark rounded-md shadow-md border-t-4 border-red-accent lg:mr-5 dark:text-gray-50">
                         <div class="lg:block flex text-center flex-col items-center p-5">
                             <div class="lg:h-40 lg:w-40 md:h-36 md:w-36 h-28 w-28 rounded-full border-1 overflow-hidden border-gray-400 focus:outline-none focus:border-white ">
                                 <img alt="Profile" src="{{ Auth::user()->picture}}" class="h-full w-full object-cover" >
@@ -28,9 +28,9 @@
                                 <div class="text-gray-600 ">BSIT 3-2</div>
                             </div>
 
-                            <input type="file" name="profile-pic" id="profile-pic" class="hidden pointer-events-none disabled cursor-default"/>
+                            <input type="file" name="profile-pic" id="profile-pic" class="hidden "/>
 
-                            <a href="javascript:void(0)" id="change-picture-btn" class="w-9 h-9 transition-colors duration-200 rounded-xl">
+                            <a href="javascript:void(0)" id="change-picture-btn" class="w-9 h-9 transition-colors duration-200 rounded-xl cursor-pointer">
                                 <svg class="lg:w-11 lg:h-11 w-9 h-9 transform lg:-translate-y-52 -translate-y-40 md:-translate-y-44 lg:translate-x-32 md:translate-x-15 translate-x-10 stroke-current bg-red-accent hover:bg-gray-100 text-gray-200 hover:text-red-accent p-2 rounded-full " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                             </a>  
                         </div>
@@ -67,57 +67,107 @@
                                 </li>
                             </ul>  
                         </div>
-                        <div class="lg:p-5 border-t border-gray-400 dark:border-dark-50  "></div>
+                        <div class="lg:p-2 border-t border-gray-400 dark:border-dark-50  "></div>
 
                         {{-- Start Tabs --}}
                         <div class="flex flex-col min-w-0 break-words bg-white dark:bg-transparent text-gray-700 dark:text-gray-50 w-full mb-6">
 
-                            <h1 class="text-lg font-bold ml-60">Personal Details</h1>
                             <div class="px-20 py-5 flex-auto">
                                 <div class="tab-content tab-space">
+                                    {{-- Personal Details Tab --}}
                                     <div class="block" id="tab-info">
+                                        <h1 class="text-lg font-bold ml-32 mb-3">Personal Details</h1>
                                         <div class="flex flex-col md:flex-row ">
-                                            <div class="w-36 font-bold h-6 mx-2 mt-3 text-gray-500">Lastname *</div>
-                                            <div class="flex-1 flex flex-col md:flex-row">
-                                                <div class="w-full flex-1 mx-2">
-                                                    <div class="my-2 p-1 bg-white flex border border-gray-200 rounded">
-                                                        <input placeholder="Lastname" class="p-1 px-2 appearance-none outline-none w-full text-gray-800 ">
-                                                    </div>
+                                            <div class="w-36 tracking-wide font-bold h-6 mx-2 mt-3 text-gray-500">Lastname *</div>
+                                            <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Lastname">
+                                        </div>
+                                        <div class="pt-2 flex flex-col md:flex-row ">
+                                            <div class="w-36 tracking-wide font-bold h-6 mx-2 mt-3 text-gray-500">Firstname *</div>
+                                            <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-first-name" type="text" placeholder="Firstname">
+                                        </div>
+                                        <div class="pt-2 flex flex-col md:flex-row ">
+                                            <div class="w-36 tracking-wide font-bold h-6 mx-2 mt-3 text-gray-500">Middlename *</div>
+                                            <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-middle-name" type="text" placeholder="Middlename">
+                                        </div>
+
+                                        <div class="flex flex-col md:flex-row border-b border-gray-200 pb-4 mb-4"></div>
+
+                                        {{--Other Personal Details --}}
+                                        
+                                        <div class="flex flex-col md:flex-row"> 
+                                            <div class="w-32 font-bold h-6 mx-2 mt-3 text-gray-800">
+                                            </div>   
+                                            <div class="w-full flex flex-col md:flex-row">
+                                                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                                    <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2" for="grid-gender">
+                                                        Gender
+                                                      </label>
+                                                      <div class="relative">
+                                                        <select class=" appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-gender">
+                                                          <option>Male</option>
+                                                          <option>Female</option>
+                                                        </select>
+                                                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
+                                                          <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                                        </div>
+                                                      </div>
+                                                </div>
+                                                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                                    <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2" for="grid-civilstat">
+                                                    Civil Status
+                                                    </label>
+                                                    <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-civilstat" type="text" placeholder="">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="flex flex-col md:flex-row ">
-                                            <div class="w-36 font-bold h-6 mx-2 mt-3 text-gray-500">Firstname *</div>
-                                            <div class="flex-1 flex flex-col md:flex-row">
-                                                <div class="w-full flex-1 mx-2">
-                                                    <div class="my-2 p-1 bg-white flex border border-gray-200 rounded">
-                                                        <input placeholder="Firstname" class="p-1 px-2 appearance-none outline-none w-full text-gray-800 ">
-                                                    </div>
+
+                                        <div class="flex flex-col md:flex-row"> 
+                                            <div class="w-32 font-bold h-6 mx-2 mt-3 text-gray-800">
+                                            </div>   
+                                            <div class="w-full flex flex-col md:flex-row">
+                                                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                                    <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2" for="grid-birthday">
+                                                    Birthday
+                                                    </label>
+                                                    <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-birthday" type="date" placeholder="">
+                                                </div>
+                                                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                                    <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2" for="grid-birthplace">
+                                                    Birthplace
+                                                    </label>
+                                                    <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-birthplace" type="text" placeholder="">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="flex flex-col md:flex-row border-b border-gray-200 pb-4 mb-4">
-                                            <div class="w-36 font-bold h-6 mx-2 mt-3 text-gray-500">Middlename *</div>
-                                            <div class="flex-1 flex flex-col md:flex-row">
-                                                <div class="w-full flex-1 mx-2">
-                                                    <div class="my-2 p-1 bg-white flex border border-gray-200 rounded">
-                                                        <input placeholder="Middlename" class="p-1 px-2 appearance-none outline-none w-full text-gray-800 ">
-                                                    </div>
+
+
+                                        <div class="flex flex-col md:flex-row"> 
+                                            <div class="w-32 font-bold h-6 mx-2 mt-3 text-gray-800">
+                                            </div>   
+                                            <div class="w-full flex flex-col md:flex-row">
+                                                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                                    <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2" for="grid-religion">
+                                                    Religion
+                                                    </label>
+                                                    <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-religion" type="text" placeholder="">
+                                                </div>
+                                                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                                    <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2" for="grid-nationality">
+                                                    Nationality
+                                                    </label>
+                                                    <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-nationality" type="text" placeholder="">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class=""></div>
+                                        
                                     </div>
+                                    {{-- Address Tab --}}
                                     <div class="hidden" id="tab-address">
-                                        <p>
-                                        Completely synergize resource taxing relationships via
-                                        premier niche markets. Professionally cultivate one-to-one
-                                        customer service with robust ideas.
-                                        <br />
-                                        <br />
-                                        Dynamically innovate resource-leveling customer service for
-                                        state of the art customer service.
-                                        </p>
+                                        <h1 class="text-lg font-bold ml-32 mb-3">Address</h1>
+                                        <div class="flex flex-col md:flex-row ">
+                                            <div class="w-36 tracking-wide font-bold h-6 mx-2 mt-3 text-gray-500">Lastname *</div>
+                                            <textarea class="resize-ta appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" placeholder="Lastname"></textarea>
+                                        </div>
                                     </div>
                                     <div class="hidden" id="tab-guardian">
                                         <p>
@@ -141,6 +191,7 @@
                                         without functional solutions.
                                         </p>
                                     </div>
+                                    <button class="float-right py-2 px-4 rounded-full bg-red-accent text-gray-100 text-sm active:outline-none focus:outline-none hover:bg-red-800 transition ease">save</button>
                                 </div>
                             </div>
                         </div>
@@ -151,4 +202,5 @@
         </section>
     </div>
 </main>
+
 @endsection

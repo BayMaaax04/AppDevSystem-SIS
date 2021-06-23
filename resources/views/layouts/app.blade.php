@@ -14,10 +14,12 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/scripts.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.0.1/dist/alpine.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <link href="{{ url('css/style.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('plugins/ijaboCropTool/ijaboCropTool.min.css')}}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <style>
       #menu-toggle:checked + #menu {
         display: block;
@@ -139,9 +141,15 @@
         @yield('content')
     </div>
 </body>
-@push('scripts')
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
   <script src="{{ asset('plugins/ijaboCropTool/ijaboCropTool.min.js') }}"></script> 
-@endpush
+  <script>
+    flatpickr("#grid-birthday", {
+        altInput: true,
+        altFormat: "F j, Y",
+        dateFormat: "Y-m-d",
+    });
+  </script>
+
 </html>
