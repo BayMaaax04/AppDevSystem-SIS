@@ -12,6 +12,7 @@
 
                 <form class="w-full px-6 space-y-6 sm:px-10 sm:space-y-8" method="POST"
                     action="{{ route('register') }}">
+                    @csrf
                     <br>
                     @if( Session::get('success'))
                         <div class="flex items-center bg-green-500 text-white text-sm font-bold px-4 py-3" role="alert">
