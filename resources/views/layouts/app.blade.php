@@ -10,11 +10,11 @@
     <title>{{ config('app.name', 'PUP Student Portal') }}</title>
 
     <!-- Scripts -->
-
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/scripts.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.0.1/dist/alpine.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <link href="{{ url('css/style.css') }}" rel="stylesheet">
@@ -27,7 +27,6 @@
 
       .active {
         border-bottom: 2px solid #800000; 
-        font-weight: 900;
       }
     </style>
 
@@ -36,12 +35,13 @@
 <body class="bg-gray-100 dark:bg-gray-tertiary-dark antialiased leading-none font-sans" >
     <div id="app">
       
-        <header class="dark:bg-gray-secondary-dark bg-white lg:px-20 px-6 flex flex-wrap items-center lg:py-0 py-2 lg:relative fixed lg:w-auto w-full">
+        <header class="dark:bg-gray-secondary-dark bg-white lg:px-20 px-6 flex flex-wrap items-center lg:py-0 py-2 fixed top-0 w-full z-10">
 
               <label for="menu-toggle" class="cursor-pointer lg:hidden block mr-2">
                 <svg class="w-6 h-6 fill-current text-gray-900 dark:text-white"  stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
               </label>
 
+              {{-- Logo --}}
               <div class="relative flex justify-between center lg:flex-1">
                   <a href="" class="text-lg font-semibold text-white-500 dark:text-white-700 no-underline flex">
                       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="h-9 self-end fill-current text-red-accent dark:text-white" viewBox="0 0 1008 746">
@@ -60,16 +60,16 @@
 
                   <ul class="lg:flex item-center justify-between text-base text-gray-800 dark:text-white pt-4 lg:pt-0" id="navbar">
                     <li>
-                      <a href="/" class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-red-accent active" id="nav-links">{{ __('Home') }}</a>
+                      <a href="{{ route('user.dashboard') }}" class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-red-accent" id="nav-links">{{ __('Home') }}</a>
                     </li>
                     <li>
-                      <a href="" class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-red-accent" id="nav-links">{{ __('Registration') }}</a>
+                      <a href="{{ route('user.registration') }}" class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-red-accent" id="nav-links">{{ __('Registration') }}</a>
                     </li>
                     <li>
-                      <a href="" class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-red-accent" id="nav-links">{{ __('Grading') }}</a>
+                      <a href="{{ route('user.grading') }}" class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-red-accent" id="nav-links">{{ __('Grading') }}</a>
                     </li>
                     <li>
-                      <a href="" class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-red-accent" id="nav-links">{{ __('Schedule') }}</a>
+                      <a href="{{ route('user.schedule') }}" class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-red-accent" id="nav-links">{{ __('Schedule') }}</a>
                     </li>
                   </ul>  
                   
@@ -142,14 +142,98 @@
     </div>
 </body>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+
   <script src="{{ asset('plugins/ijaboCropTool/ijaboCropTool.min.js') }}"></script> 
   <script>
+
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+   
+    $(function () {
+      // Update personal Info
+      $('#userInfoForm').on('submit', function(e){
+        e.preventDefault();
+
+        $.ajax({
+          url:$(this).attr('action'),
+          method:$(this).attr('method'),
+          data:new FormData(this),
+          processData:false,
+          dataType:'json',
+          contentType:false,
+          beforeSend:function(){
+            $(document).find('span.error-text').text('');
+          },
+          success:function(data){
+            if(data.status == 0){
+              $.each(data.error, function(prefix, val){
+                $('span.'+prefix+'_error').text(val[0]); 
+              });
+            }else{
+              $('#userInfoForm')[0].reset();
+              alert(data.msg);
+            }
+          }
+        });
+      });
+    });
+
     flatpickr("#grid-birthday", {
         altInput: true,
         altFormat: "F j, Y",
         dateFormat: "Y-m-d",
     });
+
+    // Active Navbar
+    const currentLocation = location.href;
+    const navLinks = document.querySelectorAll("a#nav-links");
+    console.log(navLinks);
+    const navLength = navLinks.length;
+    for (let i = 0; i < navLength; i++) {
+        if (navLinks[i].href === currentLocation) {
+            navLinks[i].className =
+                "active lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-red-accent border-b-2 border-red-accent font-bold";
+        }
+    }
+
+    const changeAtiveTab = (event, tabID) => {
+      let element = event.target;
+      while (element.nodeName !== "A") {
+          element = element.parentNode;
+      }
+      ulElement = element.parentNode.parentNode;
+      aElements = ulElement.querySelectorAll("li > a");
+      tabContents = document
+          .getElementById("tabs-id")
+          .querySelectorAll(".tab-content > div");
+      for (let i = 0; i < aElements.length; i++) {
+          aElements[i].classList.remove("text-gray-800");
+          aElements[i].classList.remove("border-red-accent");
+          aElements[i].classList.add("text-gray-500");
+
+          aElements[i].classList.remove("dark:text-gray-50");
+          aElements[i].classList.remove("dark:border-gray-200");
+          aElements[i].classList.add("dark:text-gray-500");
+
+          tabContents[i].classList.add("hidden");
+          tabContents[i].classList.remove("block");
+      }
+      element.classList.remove("text-gray-500");
+      element.classList.add("text-gray-800");
+      element.classList.add("border-red-accent");
+
+      element.classList.remove("dark:text-gray-500");
+      element.classList.add("dark:text-gray-50");
+
+      document.getElementById(tabID).classList.remove("hidden");
+      document.getElementById(tabID).classList.add("block");
+  };
+    changeAtiveTab();
+
   </script>
 
 </html>

@@ -1,10 +1,12 @@
 <?php
 
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 
 use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,17 +18,16 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-
-
 Route::middleware(['middleware'=> 'PreventBackHistory'])->group(function () {
     Auth::routes();
 });
 
 Route::get('/', function () {
+    Alert::alert('Title', 'Message', 'Type');
     return view('auth.login');
 });
 
-Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth','PreventBackHistory']], function () {
@@ -39,6 +40,15 @@ Route::group(['prefix'=>'user', 'middleware'=>['isUser','auth','PreventBackHisto
     Route::get('dashboard', [UserController::class,'index'])->name('user.dashboard');
     Route::get('profile', [UserController::class,'profile'])->name('user.profile');
     Route::get('settings', [UserController::class,'settings'])->name('user.settings');
+    Route::get('registration', [UserController::class,'registration'])->name('user.registration');
+    Route::get('grading', [UserController::class,'grading'])->name('user.grading');
+    Route::get('schedule', [UserController::class,'schedule'])->name('user.schedule');
+
+    Route::post('update-profile-info', [UserController::class,'updateInfo'])->name('userUpdateInfo');
+
+    Route::post('change-profile-picture', [UserController::class,'updatePicture'])->name('userProfileUpdate');
+
+
 });
 
 Route::get('reset-password/{token}', 'App\Http\Controllers\Auth\ResetPasswordController@getPassword');
