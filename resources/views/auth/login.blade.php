@@ -11,7 +11,6 @@
                         {{ session('status') }}
                     </div>
                 @endif
-
                 <header class="font-semibold bg-gray-200 text-gray-700 py-5 px-6 sm:py-6 sm:px-8 sm:rounded-t-md">
                     {{ __('Login') }}
                 </header>
@@ -88,3 +87,4 @@
     </div>
 </main>
 @endsection
+

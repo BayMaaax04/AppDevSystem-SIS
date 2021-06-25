@@ -20,7 +20,6 @@
         "postcss": "^8.3.0",
         "postcss-import": "^14.0.2",
         "postcss-nested": "^5.0.5",
-        "sweetalert2": "^11.0.18",
         "tailwindcss": "^2.1.4",
         "vue-template-compiler": "^2.6.11"
     },
@@ -33,5 +32,8 @@
     "main": "tailwind.config.js",
     "directories": {
         "test": "tests"
+    },
+    "dependencies": {
+        "sweetalert2": "^11.0.18"
     }
 }
