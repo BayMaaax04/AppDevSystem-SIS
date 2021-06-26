@@ -9,19 +9,14 @@
 
     <title>{{ config('app.name', 'PUP Student Portal') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/scripts.js') }}" defer></script>
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.0.1/dist/alpine.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.0.18/sweetalert2.min.js"></script>
+
     <!-- Styles -->
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-    <link href="{{ url('css/style.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('plugins/ijaboCropTool/ijaboCropTool.min.css')}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.0.18/sweetalert2.min.css" />
+    <link rel="stylesheet" href="{{ asset('plugins/ijaboCropTool/ijaboCropTool.min.css')}}">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    <link href="{{ url('css/style.css') }}" rel="stylesheet">
+
     <style>
       #menu-toggle:checked + #menu {
         display: block;
@@ -105,7 +100,7 @@
 
                 <div x-data="{ dropdownOpen: false }" class="lg:relative">
                   <button @click="dropdownOpen = !dropdownOpen" class="block h-10 w-10 rounded-full overflow-hidden border-1 border-gray-400 focus:outline-none focus:border-white">
-                    <img class="h-full w-full object-cover" src="{{ Auth::user()->picture}}" alt="Your avatar">
+                    <img class="h-full w-full object-cover profile-picture" src="{{ Auth::user()->picture}}" alt="Your avatar">
                   </button>
 
 
@@ -113,7 +108,7 @@
                   <div x-show="dropdownOpen" class="absolute right-0 mt-1 w-80 pb-2 z-50  bg-white dark:bg-gray-secondary-dark rounded-lg shadow-xl divide-y-1 divide-gray-200 ">
                     <div class="px-4 py-3 bg-red-accent flex ">
                       <div class="block h-20 w-20 rounded-full overflow-hidden focus:outline-none focus:border-white ">
-                        <img class="h-full w-full object-cover " src="{{ Auth::user()->picture}}" alt="Your avatar">
+                        <img class="h-full w-full object-cover profile-picture" src="{{ Auth::user()->picture}}" alt="Your avatar">
                       </div>
 
                       <div class="profile-detail self-center text-white pl-4 ">
@@ -138,106 +133,18 @@
               </div>
                @endguest
         </header>
-
-
         @yield('content')
-
-        @yield('scripts')
+        
     </div>
-</body>
-
-
+        <!-- Scripts -->
+      {{-- Scripts --}}
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.0.1/dist/alpine.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.0.18/sweetalert2.min.js"></script>
+  <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script> 
   <script src="{{ asset('plugins/ijaboCropTool/ijaboCropTool.min.js') }}"></script> 
-  <script>
-
-
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-   
-    $(function () {
-      // Update personal Info
-      $('#userInfoForm').on('submit', function(e){
-        e.preventDefault();
-
-        $.ajax({
-          url:$(this).attr('action'),
-          method:$(this).attr('method'),
-          data:new FormData(this),
-          processData:false,
-          dataType:'json',
-          contentType:false,
-          beforeSend:function(){
-            $(document).find('span.error-text').text('');
-          },
-          success:function(data){
-            if(data.status == 0){
-              $.each(data.error, function(prefix, val){
-                $('span.'+prefix+'_error').text(val[0]); 
-              });
-            }else{
-              $('#userInfoForm')[0].reset();
-              alert(data.msg);
-            }
-          }
-        });
-      });
-    });
-
-    flatpickr("#grid-birthday", {
-        altInput: true,
-        altFormat: "F j, Y",
-        dateFormat: "Y-m-d",
-    });
-
-    // Active Navbar
-    const currentLocation = location.href;
-    const navLinks = document.querySelectorAll("a#nav-links");
-    console.log(navLinks);
-    const navLength = navLinks.length;
-    for (let i = 0; i < navLength; i++) {
-        if (navLinks[i].href === currentLocation) {
-            navLinks[i].className =
-                "active lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-red-accent border-b-2 border-red-accent font-bold";
-        }
-    }
-
-    const changeAtiveTab = (event, tabID) => {
-      let element = event.target;
-      while (element.nodeName !== "A") {
-          element = element.parentNode;
-      }
-      ulElement = element.parentNode.parentNode;
-      aElements = ulElement.querySelectorAll("li > a");
-      tabContents = document
-          .getElementById("tabs-id")
-          .querySelectorAll(".tab-content > div");
-      for (let i = 0; i < aElements.length; i++) {
-          aElements[i].classList.remove("text-gray-800");
-          aElements[i].classList.remove("border-red-accent");
-          aElements[i].classList.add("text-gray-500");
-
-          aElements[i].classList.remove("dark:text-gray-50");
-          aElements[i].classList.remove("dark:border-gray-200");
-          aElements[i].classList.add("dark:text-gray-500");
-
-          tabContents[i].classList.add("hidden");
-          tabContents[i].classList.remove("block");
-      }
-      element.classList.remove("text-gray-500");
-      element.classList.add("text-gray-800");
-      element.classList.add("border-red-accent");
-
-      element.classList.remove("dark:text-gray-500");
-      element.classList.add("dark:text-gray-50");
-
-      document.getElementById(tabID).classList.remove("hidden");
-      document.getElementById(tabID).classList.add("block");
-  };
-    changeAtiveTab();
-
-  </script>
-
+  <script src="{{ asset('js/app.js') }}"></script>
+  <script src="{{ asset('js/scripts.js') }}"></script>
+  @yield('scripts')
+</body>
 </html>

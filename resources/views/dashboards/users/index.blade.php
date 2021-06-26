@@ -18,7 +18,7 @@
                     <div class="intro-y box mt-5 lg:mt-0 px-8 lg:pb-40 lg:flex-3 flex-2 lg:flex block items-center lg:flex-col bg-white dark:bg-gray-primary-dark rounded-md shadow-md border-t-4 border-red-accent lg:mr-5 dark:text-gray-50">
                         <div class="lg:block flex text-center flex-col items-center p-5">
                             <div class="lg:h-40 lg:w-40 md:h-36 md:w-36 h-28 w-28 rounded-full border-1 overflow-hidden border-gray-400 focus:outline-none focus:border-white ">
-                                <img alt="Profile" src="{{ Auth::user()->picture}}" class="h-full w-full object-cover" >
+                                <img alt="Profile" src="{{ Auth::user()->picture}}" class="h-full w-full object-cover profile-picture" >
                             </div>
 
                             <div class="flex-1 pt-2">
@@ -26,7 +26,7 @@
                                 <div class="text-gray-600 ">BSIT 3-2</div>
                             </div>
 
-                            <input type="file" name="profile-pic" id="profile-pic" class="hidden "/>
+                            <input type="file" name="user_image" id="user_image" class="hidden opacity-0"/>
 
                             <a href="javascript:void(0)" id="change-picture-btn" class="w-9 h-9 transition-colors duration-200 rounded-xl cursor-pointer">
                                 <svg class="lg:w-11 lg:h-11 w-9 h-9 transform lg:-translate-y-52 -translate-y-40 md:-translate-y-44 lg:translate-x-32 md:translate-x-15 translate-x-10 stroke-current bg-red-accent hover:bg-gray-100 text-gray-200 hover:text-red-accent p-2 rounded-full " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
@@ -83,19 +83,19 @@
                                                 <input class="appearance-none w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 hidden"  id="grid-email" type="text" placeholder="email" value="{{Auth::user()->email}}" name="email" readonly >
                                             </div>
                                             <div class="flex flex-col lg:flex-row ">
-                                                <div class="w-36 tracking-wide font-bold h-6 mx-2 mt-3 text-gray-500">Lastname *</div>
+                                                <div class="w-36 tracking-wide font-bold text-xs h-6 mx-2 mt-3 text-gray-500">Lastname *</div>
                                                 <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="lastname" type="text" placeholder="Lastname" value="{{Auth::user()->lastname}}" name="lastname">
                                                 <span class="text-sm text-red-accent italic error-text lastname-error"></span>
                                             </div>
 
                                             <div class="pt-2 flex flex-col lg:flex-row ">
-                                                <div class="w-36 tracking-wide font-bold h-6 mx-2 mt-3 text-gray-500">Firstname *</div>
+                                                <div class="w-36 tracking-wide font-bold text-xs h-6 mx-2 mt-3 text-gray-500">Firstname *</div>
                                                 <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="firstname" type="text" placeholder="Firstname" value="{{Auth::user()->firstname}}" name="firstname">
                                                 <span class="text-sm text-red-accent italic error-text firstname-error"></span>
                                             </div>
 
                                             <div class="pt-2 flex flex-col lg:flex-row ">
-                                                <div class="w-36 tracking-wide font-bold h-6 mx-2 mt-3 text-gray-500">Middlename *</div>
+                                                <div class="w-36 tracking-wide font-bold text-xs h-6 mx-2 mt-3 text-gray-500">Middlename *</div>
 
                                                 <div class="block w-full">
                                                     <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="middlename" type="text" placeholder="Middlename"  name="middlename" value="{{Auth::user()->middlename}}">
@@ -150,7 +150,7 @@
                                                         <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2" for="grid-birthday">
                                                         Birthday
                                                         </label>
-                                                        <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="grid-birthday" type="date" placeholder="" name="birthday">
+                                                        <input class="appearance-none cursor-pointer block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="grid-birthday" type="date" placeholder="" name="birthday">
                                                         <span class="text-sm text-red-accent italic error-text birthday-error"></span>
                                                     </div>
                                                     <div class="w-full lg:px-3 lg:mb-6 mb-0">
@@ -284,4 +284,152 @@
     </div>
 </main>
 
+@endsection
+
+@section('scripts')
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+   
+    $(function () {
+      // Update personal Info
+      $('#userInfoForm').on('submit', function(e){
+        e.preventDefault();
+
+        $.ajax({
+          url:$(this).attr('action'),
+          method:$(this).attr('method'),
+          data:new FormData(this),
+          processData:false,
+          dataType:'json',
+          contentType:false,
+          beforeSend:function(){
+            $(document).find('span.error-text').text('');
+          },
+          success:function(data){
+            if(data.status == 0){
+              $.each(data.error, function(prefix, val){
+                $('span.'+prefix+'_error').text(val[0]); 
+              });
+            }else{
+              $('#userInfoForm')[0].reset();
+              alert(data.msg);
+            }
+          }
+        });
+      });
+    });
+
+    flatpickr("#grid-birthday", {
+        altInput: true,
+        altFormat: "F j, Y",
+        dateFormat: "Y-m-d",
+    });
+
+    // Change profile Pic
+    document.querySelector("#change-picture-btn")
+        .addEventListener("click", function () {
+            document.querySelector("#user_image").click();
+        });
+
+        $("#user_image").ijaboCropTool({
+          preview: ".profile-picture",
+          setRatio: 1,
+          allowedExtensions: ["jpg", "jpeg", "png"],
+          buttonsText: ["CROP & SAVE", "CANCEL"],
+          buttonsColor: ["#30bf7d", "#ee5155", -15],
+          processUrl: '{{ route("user.updatePicture") }}',
+
+          onSuccess: function (message, element, status) {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top',
+                showConfirmButton: false,
+                width:'500',
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: 'success',
+                title: 'Your profile has been updated successfully.'
+            })
+          },
+          onError: function (message, element, status) {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top',
+                showConfirmButton: false,
+                width:'500',
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: 'error',
+                title: 'Something went wrong, please try again later.'
+            })
+          },
+      });
+
+      
+    // Active Navbar
+    // const currentLocation = location.href;
+    // const navLinks = document.querySelectorAll("a#nav-links");
+    // const navLength = navLinks.length;
+    // for (let i = 0; i < navLength; i++) {
+    //     if (navLinks[i].href === currentLocation) {
+    //         navLinks[i].className =
+    //             "active lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-red-accent border-b-2 border-red-accent font-bold";
+    //     }
+    // }
+    
+    // Active Tabs
+    const changeAtiveTab = (event, tabID) => {
+      let element = event.target;
+      while (element.nodeName !== "A") {
+          element = element.parentNode;
+      }
+      ulElement = element.parentNode.parentNode;
+      aElements = ulElement.querySelectorAll("li > a");
+      tabContents = document
+          .getElementById("tabs-id")
+          .querySelectorAll(".tab-content > div");
+      for (let i = 0; i < aElements.length; i++) {
+          aElements[i].classList.remove("text-gray-800");
+          aElements[i].classList.remove("border-red-accent");
+          aElements[i].classList.add("text-gray-500");
+
+          aElements[i].classList.remove("dark:text-gray-50");
+          aElements[i].classList.remove("dark:border-gray-200");
+          aElements[i].classList.add("dark:text-gray-500");
+
+          tabContents[i].classList.add("hidden");
+          tabContents[i].classList.remove("block");
+      }
+      element.classList.remove("text-gray-500");
+      element.classList.add("text-gray-800");
+      element.classList.add("border-red-accent");
+
+      element.classList.remove("dark:text-gray-500");
+      element.classList.add("dark:text-gray-50");
+
+      document.getElementById(tabID).classList.remove("hidden");
+      document.getElementById(tabID).classList.add("block");
+  };
+    changeAtiveTab();
+
+
+  </script>  
 @endsection

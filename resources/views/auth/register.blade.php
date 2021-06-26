@@ -173,7 +173,7 @@
 
                     <div class="flex items-center justify-center">
                         <button type="submit"
-                            class=" relative inline-block overflow-hidden mt-5 btn-reg w-2/3 border-none rounded-lg bg-red-accent text-white outline-none cursor-pointer transition hover:bg-red-800">
+                            class=" relative inline-block overflow-hidden btn-reg w-2/3 border-none rounded-lg bg-red-accent text-white outline-none cursor-pointer transition hover:bg-red-800">
                             {{ __('Register') }}
                         </button>
                     </div>

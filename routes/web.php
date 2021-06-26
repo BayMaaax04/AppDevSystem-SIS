@@ -46,9 +46,7 @@ Route::group(['prefix'=>'user', 'middleware'=>['isUser','auth','PreventBackHisto
 
     Route::post('update-profile-info', [UserController::class,'updateInfo'])->name('userUpdateInfo');
 
-    Route::post('change-profile-picture', [UserController::class,'updatePicture'])->name('userProfileUpdate');
-
-
+    Route::post('update_picture', [UserController::class,'updatePicture'])->name('user.updatePicture');
 });
 
 Route::get('reset-password/{token}', 'App\Http\Controllers\Auth\ResetPasswordController@getPassword');

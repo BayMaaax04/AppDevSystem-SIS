@@ -57,7 +57,7 @@
             Swal.fire({
                 position: 'center',
                 icon: 'success',
-                title: 'We have emailed your password reset link!',
+                title: '{{ session('status') }}',
                 text: 'You may now check to your email',
                 backdrop: `rgba(0,0,0,0.70)`,
                 width: 600,

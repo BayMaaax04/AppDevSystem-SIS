@@ -107,11 +107,24 @@ class RegisterController extends Controller
             ],
         ]);
 
+        // Makr Avatar
+
+        $path = 'users/images/';
+        $fontPath = public_path('fonts/Oliciy.ttf');
+        $char = strtoupper($request->lastname[0]);
+        $newAvatarName = rand(12,34353).time().'_avatar.png';
+        $dest = $path.$newAvatarName;
+
+        $createAvatar = makeAvatar($fontPath,$dest,$char);
+        $picture = $createAvatar == true ? $newAvatarName : '';
+
+
         $user = new User();
         $user->lastname = $request->lastname;
         $user->firstname = $request->firstname;
         $user->middlename = $request->middlename;
         $user->email  = $request->email ;
+        $user->picture  = $picture ;
         $user->role = 2;
         $user->password = \Hash::make($request->password);
 
