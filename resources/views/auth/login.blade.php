@@ -1,5 +1,9 @@
 @extends('layouts.nonav')
 
+@section('title')
+  PUP Student Portal | Login  
+@endsection
+
 @section('content')
 <main>
     <div class="flex w-full min-h-screen">

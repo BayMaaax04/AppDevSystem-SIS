@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+  PUP Student Portal | Home  
+@endsection
+
 @section('content')
 <main class="sm:container sm:mx-auto sm:mt-2 text-sm">
     <div class="w-full sm:px-30">
@@ -431,5 +435,5 @@
     changeAtiveTab();
 
 
-  </script>  
+</script>  
 @endsection

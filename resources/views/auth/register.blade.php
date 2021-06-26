@@ -1,8 +1,11 @@
 @extends('layouts.nonav')
 
+
+@section('title')
+  PUP Student Portal | Register  
+@endsection
+
 @section('content')
-
-
 <main>
     <div class="flex w-full min-h-screen">
         <div class="lg:w-2/4 w-full">
