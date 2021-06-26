@@ -2,7 +2,7 @@
 
 @section('content')
 
-<main class="p-6 m-9 bg-white dark:bg-gray-tertiary-dark rounded-xl shadow-md border-t-4 border-red-accent items-center space-x-4 ">
+<main class="p-6 m-9 bg-white dark:bg-gray-tertiary-dark rounded-xl shadow-md border-t-4 border-red-accent items-center space-x-4 mt-16">
     <div class="flex-shrink-0">
         <div class="max-w-sm mx-auto space-y-9">
             <section class="p-4 rounded-xl shadow-md divide-y-2 dark:bg-gray-primary-dark">
@@ -105,7 +105,7 @@
                     </div>
 
                     <div class="text-center text-gray-100 py-4">
-                        <button type="submit" class="w-40 h-8 rounded-full active:bg-red-800 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 transition duration-500 ease-in-out bg-red-accent hover:bg-red-900 transform hover:-translate-y-0.5 hover:scale-100">
+                        <button type="submit" class="w-40 h-8 rounded-lg active:bg-red-800 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 transition duration-500 ease-in-out bg-red-accent hover:bg-red-700 transform">
                             {{ __('Reset Password') }}
                         </button>
                     </div>

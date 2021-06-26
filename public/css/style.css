@@ -84,3 +84,28 @@
     height: 50px;
     cursor: pointer;
 }
+*:focus {
+    outline: 0 !important;
+}
+
+em {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.685);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    border-radius: 50%;
+    animation: animate 0.4s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        width: 0px;
+        height: 0px;
+        opacity: 0.5;
+    }
+    100% {
+        width: 500px;
+        height: 500px;
+        opacity: 0.5;
+    }
+}

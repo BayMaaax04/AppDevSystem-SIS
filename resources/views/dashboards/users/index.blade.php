@@ -11,10 +11,8 @@
         @endif
 
         <section class="flex flex-col break-words">
-            <div class="mx-20 my-2">
-                <h2 class="text-lg uppercase font-bold mr-auto my-4 dark:text-gray-200">
-                    Profile
-                </h2>
+            <div class="lg:mx-20 mx-2 my-2">
+                <div class="mt-16"></div>
 
                 <div class="lg:flex block h-full justify-between">
                     <div class="intro-y box mt-5 lg:mt-0 px-8 lg:pb-40 lg:flex-3 flex-2 lg:flex block items-center lg:flex-col bg-white dark:bg-gray-primary-dark rounded-md shadow-md border-t-4 border-red-accent lg:mr-5 dark:text-gray-50">
@@ -49,7 +47,7 @@
 
                     {{-- Tab Links --}}
                     <div class="flex-1 mt-5 lg:mt-0 p-2 block bg-white dark:bg-gray-primary-dark dark:text-gray-50 rounded-md shadow-md border-t-4 border-red-accent items-center flex-wrap"  id="tabs-id">
-                        <div class="w-full">
+                        <div class="w-full hidden lg:flex">
                             <ul class="lg:flex item-center text-sm text-gray-800 dark:text-white flex-wrap flex-row ">
                                 <li>
                                     <a class="lg:p-2 py-1 lg:px-2 px-0 block border-b-2 border-transparent hover:border-red-accent hover:font-bold hover:text-gray-800 text-gray-800 border-red-accent
@@ -67,134 +65,217 @@
                                 </li>
                             </ul>  
                         </div>
-                        <div class="lg:p-2 border-t border-gray-400 dark:border-dark-50  "></div>
+                        <div class="lg:p-2 border-t border-gray-400 dark:border-dark-50 lg:flex hidden "></div>
 
                         {{-- Start Tabs --}}
-                        <div class="flex flex-col min-w-0 break-words bg-white dark:bg-transparent text-gray-700 dark:text-gray-50 w-full mb-6">
+                        <form  method="POST" action="{{ route('userUpdateInfo') }}" id="userInfoForm">
+                            @csrf
+                            <!-- Equivalent to... -->
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                            
+                            <div class="flex flex-col min-w-0 break-words bg-white dark:bg-transparent text-gray-700 dark:text-gray-50 w-full mb-6">
+                                <div class="lg:px-20 px-2 py-5 flex-auto">
+                                    <div class="tab-content tab-space">
+                                        {{-- Personal Details Tab --}}
+                                        <div class="block" id="tab-info">
+                                            <h1 class="text-lg font-bold lg:ml-32 mb-3 flex">Personal Details</h1>
+                                            <div class="flex flex-col lg:flex-row ">
+                                                <input class="appearance-none w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 hidden"  id="grid-email" type="text" placeholder="email" value="{{Auth::user()->email}}" name="email" readonly >
+                                            </div>
+                                            <div class="flex flex-col lg:flex-row ">
+                                                <div class="w-36 tracking-wide font-bold h-6 mx-2 mt-3 text-gray-500">Lastname *</div>
+                                                <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="lastname" type="text" placeholder="Lastname" value="{{Auth::user()->lastname}}" name="lastname">
+                                                <span class="text-sm text-red-accent italic error-text lastname-error"></span>
+                                            </div>
 
-                            <div class="px-20 py-5 flex-auto">
-                                <div class="tab-content tab-space">
-                                    {{-- Personal Details Tab --}}
-                                    <div class="block" id="tab-info">
-                                        <h1 class="text-lg font-bold ml-32 mb-3">Personal Details</h1>
-                                        <div class="flex flex-col md:flex-row ">
-                                            <div class="w-36 tracking-wide font-bold h-6 mx-2 mt-3 text-gray-500">Lastname *</div>
-                                            <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Lastname">
-                                        </div>
-                                        <div class="pt-2 flex flex-col md:flex-row ">
-                                            <div class="w-36 tracking-wide font-bold h-6 mx-2 mt-3 text-gray-500">Firstname *</div>
-                                            <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-first-name" type="text" placeholder="Firstname">
-                                        </div>
-                                        <div class="pt-2 flex flex-col md:flex-row ">
-                                            <div class="w-36 tracking-wide font-bold h-6 mx-2 mt-3 text-gray-500">Middlename *</div>
-                                            <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-middle-name" type="text" placeholder="Middlename">
-                                        </div>
+                                            <div class="pt-2 flex flex-col lg:flex-row ">
+                                                <div class="w-36 tracking-wide font-bold h-6 mx-2 mt-3 text-gray-500">Firstname *</div>
+                                                <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="firstname" type="text" placeholder="Firstname" value="{{Auth::user()->firstname}}" name="firstname">
+                                                <span class="text-sm text-red-accent italic error-text firstname-error"></span>
+                                            </div>
 
-                                        <div class="flex flex-col md:flex-row border-b border-gray-200 pb-4 mb-4"></div>
+                                            <div class="pt-2 flex flex-col lg:flex-row ">
+                                                <div class="w-36 tracking-wide font-bold h-6 mx-2 mt-3 text-gray-500">Middlename *</div>
 
-                                        {{--Other Personal Details --}}
-                                        
-                                        <div class="flex flex-col md:flex-row"> 
-                                            <div class="w-32 font-bold h-6 mx-2 mt-3 text-gray-800">
-                                            </div>   
-                                            <div class="w-full flex flex-col md:flex-row">
-                                                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                                    <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2" for="grid-gender">
-                                                        Gender
-                                                      </label>
-                                                      <div class="relative">
-                                                        <select class=" appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-gender">
-                                                          <option>Male</option>
-                                                          <option>Female</option>
-                                                        </select>
-                                                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
-                                                          <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                                <div class="block w-full">
+                                                    <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="middlename" type="text" placeholder="Middlename"  name="middlename" value="{{Auth::user()->middlename}}">
+
+                                                    {{-- @error('middlename')
+                                                    <p class="text-red-500 text-xs italic mt-4">
+                                                        {{ $message }}
+                                                    </p>
+                                                    @enderror --}}
+                                                    <span class="text-sm text-red-accent italic error-text middlename-error"></span>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="flex flex-col lg:flex-row border-b border-gray-200 pb-4 lg:mb-4"></div>
+
+                                            {{--Other Personal Details --}}
+                                            
+                                            <div class="flex flex-col lg:flex-row"> 
+                                                <div class="w-32 font-bold h-6 mx-2 lg:mt-3 mt-0 text-gray-800">
+                                                </div>   
+                                                <div class="w-full flex flex-col lg:flex-row">
+                                                    <div class="w-full lg:px-3 lg:mb-6 mb-0">
+                                                        <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2" for="grid-gender">
+                                                            Gender
+                                                        </label>
+                                                        <div class="relative">
+                                                            <select class=" appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="grid-gender">
+                                                            <option value="0">Male</option>
+                                                            <option value="1">Female</option>
+                                                            </select>
+                                                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
+                                                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                                            </div>
                                                         </div>
-                                                      </div>
-                                                </div>
-                                                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                                    <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2" for="grid-civilstat">
-                                                    Civil Status
-                                                    </label>
-                                                    <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-civilstat" type="text" placeholder="">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="flex flex-col md:flex-row"> 
-                                            <div class="w-32 font-bold h-6 mx-2 mt-3 text-gray-800">
-                                            </div>   
-                                            <div class="w-full flex flex-col md:flex-row">
-                                                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                                    <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2" for="grid-birthday">
-                                                    Birthday
-                                                    </label>
-                                                    <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-birthday" type="date" placeholder="">
-                                                </div>
-                                                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                                    <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2" for="grid-birthplace">
-                                                    Birthplace
-                                                    </label>
-                                                    <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-birthplace" type="text" placeholder="">
+                                                    </div>
+                                                    <div class="w-full lg:px-3 lg:mb-6 mb-0">
+                                                        <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2" for="grid-civilstat">
+                                                        Civil Status
+                                                        </label>
+                                                        <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="grid-civilstat" type="text" placeholder="" name="civilstat">
+                                                        <span class="text-sm text-red-accent italic error-text civilstat-error"></span>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-
-                                        <div class="flex flex-col md:flex-row"> 
-                                            <div class="w-32 font-bold h-6 mx-2 mt-3 text-gray-800">
-                                            </div>   
-                                            <div class="w-full flex flex-col md:flex-row">
-                                                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                                    <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2" for="grid-religion">
-                                                    Religion
-                                                    </label>
-                                                    <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-religion" type="text" placeholder="">
-                                                </div>
-                                                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                                    <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2" for="grid-nationality">
-                                                    Nationality
-                                                    </label>
-                                                    <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-nationality" type="text" placeholder="">
+                                            <div class="flex flex-col lg:flex-row"> 
+                                                <div class="w-32 font-bold h-6 mx-2 lg:mt-3 text-gray-800">
+                                                </div>   
+                                                <div class="w-full flex flex-col lg:flex-row">
+                                                    <div class="w-full lg:px-3 lg:mb-6 mb-0">
+                                                        <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2" for="grid-birthday">
+                                                        Birthday
+                                                        </label>
+                                                        <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="grid-birthday" type="date" placeholder="" name="birthday">
+                                                        <span class="text-sm text-red-accent italic error-text birthday-error"></span>
+                                                    </div>
+                                                    <div class="w-full lg:px-3 lg:mb-6 mb-0">
+                                                        <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2" for="grid-birthplace">
+                                                        Birthplace
+                                                        </label>
+                                                        <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="grid-birthplace" type="text" placeholder="" name="birthplace">
+                                                        <span class="text-sm text-red-accent italic error-text birthplace-error"></span>
+                                                    </div>
                                                 </div>
                                             </div>
+
+                                            <div class="flex flex-col lg:flex-row"> 
+                                                <div class="w-32 font-bold h-6 mx-2 lg:mt-3 text-gray-800">
+                                                </div>   
+                                                <div class="w-full flex flex-col lg:flex-row">
+                                                    <div class="w-full lg:px-3 lg:mb-6 mb-0">
+                                                        <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2" for="grid-religion">
+                                                        Religion
+                                                        </label>
+                                                        <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="grid-religion" type="text" placeholder="" name="religion">
+                                                        <span class="text-sm text-red-accent italic error-text religion-error"></span>
+                                                    </div>
+                                                    <div class="w-full lg:px-3 lg:mb-6 mb-0">
+                                                        <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2" for="grid-nationality">
+                                                        Nationality
+                                                        </label>
+                                                        <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="grid-nationality" type="text" placeholder="" name="nationality">
+                                                        <span class="text-sm text-red-accent italic error-text nationality-error"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="flex flex-col lg:flex-row border-b border-gray-200 pb-4 mb-4"></div>
                                         </div>
-                                        
-                                    </div>
-                                    {{-- Address Tab --}}
-                                    <div class="hidden" id="tab-address">
-                                        <h1 class="text-lg font-bold ml-32 mb-3">Address</h1>
-                                        <div class="flex flex-col md:flex-row ">
-                                            <div class="w-36 tracking-wide font-bold h-6 mx-2 mt-3 text-gray-500">Lastname *</div>
-                                            <textarea class="resize-ta appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" placeholder="Lastname"></textarea>
+                                        {{-- Address Tab --}}
+                                        <div class="hidden" id="tab-address">
+                                            <h1 class="text-lg font-bold lg:ml-32 mb-3 flex"> Full Address</h1>
+                                            <address class="flex flex-col lg:flex-row ">
+                                                <div class="w-36 tracking-wide font-bold h-6 mx-2 mt-3 text-gray-500" for="grid-housenum">House Number</div>
+                                                <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="grid-housenum" type="number" placeholder="House Number" name="houseno">
+                                                <span class="text-sm text-red-accent italic error-text houseno-error"></span>
+                                            </address>
+                                            <address class="pt-2 flex flex-col lg:flex-row ">
+                                                <div class="w-36 tracking-wide font-bold h-6 mx-2 mt-3 text-gray-500" for="grid-street-name">Street Name</div>
+                                                <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="grid-street-name" type="text" placeholder="Street Name" name="streetname">
+                                                <span class="text-sm text-red-accent italic error-text streetname-error"></span>
+                                            </address>
+                                            <address class="pt-2 flex flex-col lg:flex-row ">
+                                                <div class="w-36 tracking-wide font-bold h-6 mx-2 mt-3 text-gray-500" for="grid-barangay">Barangay</div>
+                                                <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="grid-barangay" type="text" placeholder="Barangay / District" name="barangay">
+                                                <span class="text-sm text-red-accent italic error-text barangay-error"></span>
+                                            </address>
+
+                                            <address class="pt-2 flex flex-col lg:flex-row ">
+                                                <div class="w-36 tracking-wide font-bold h-6 mx-2 mt-3 text-gray-500" for="grid-city">City</div>
+                                                <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="grid-city" type="text" placeholder="City" name="city">
+                                                <span class="text-sm text-red-accent italic error-text city-error"></span>
+                                            </address>
+                                            <address class="pt-2 flex flex-col lg:flex-row ">
+                                                <div class="w-36 tracking-wide font-bold h-6 mx-2 mt-3 text-gray-500" for="grid-province">Province</div>
+                                                <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="grid-province" type="text" placeholder="Province" name="province">
+                                                <span class="text-sm text-red-accent italic error-text province-error"></span>
+                                            </address>
+                                            <address class="pt-2 flex flex-col lg:flex-row ">
+                                                <div class="w-36 tracking-wide font-bold h-6 mx-2 mt-3 text-gray-500" for="grid-zipcode">Zip Code</div>
+                                                <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="grid-zipcode" type="number" placeholder="Zip Code" min="400" max="9811"  inputmode="numeric" pattern="^(?(^00000(|-0000))|(\d{5}(|-\d{4})))$" name="zipcode">
+                                                <span class="text-sm text-red-accent italic error-text zipcode-error"></span>
+                                            </address>
+
+                                            <div class="flex flex-col lg:flex-row border-b border-gray-200 pb-4 mb-4"></div>
+
+
+                                        </div>
+                                        <div class="hidden" id="tab-guardian">
+                                            <p>
+                                            Efficiently unleash cross-media information without
+                                            cross-media value. Quickly maximize timely deliverables for
+                                            real-time schemas.
+                                            <br />
+                                            <br />
+                                            Dramatically maintain clicks-and-mortar solutions
+                                            without functional solutions.
+                                            </p>
+                                        </div>
+                                        <div class="hidden" id="tab-educ">
+                                            <p>
+                                            Almost every day we encounter a lot of exotic animal in the forrest and it efficiently unleash cross-media information without
+                                            cross-media value. Quickly maximize timely deliverables for
+                                            real-time schemas.
+                                            <br />
+                                            <br />
+                                            Basically it dramatically maintain clicks-and-mortar solutions
+                                            without functional solutions.
+                                            </p>
                                         </div>
                                     </div>
-                                    <div class="hidden" id="tab-guardian">
-                                        <p>
-                                        Efficiently unleash cross-media information without
-                                        cross-media value. Quickly maximize timely deliverables for
-                                        real-time schemas.
-                                        <br />
-                                        <br />
-                                        Dramatically maintain clicks-and-mortar solutions
-                                        without functional solutions.
-                                        </p>
+                                    <div class="w-full flex lg:hidden items-center text-center justify-center">
+                                        <ul class="flex item-center justify-center text-center text-sm text-white flex-wrap flex-row ">
+                                            <li>
+                                                <div class="pointer-events-none h-8 w-8 flex items-center justify-center text-gray-800 dark:text-white">&laquo;</div>
+                                            </li>
+                                            <li class="px-2">
+                                                <a class="cursor-pointer p-2 bg-red-accent hover:bg-red-700 rounded-full h-8 w-8 flex items-center justify-center" onclick="changeAtiveTab(event,'tab-info')">1</a>
+                                            </li>
+                                            <li class="px-2">
+                                                <a class="cursor-pointer p-2 bg-red-accent hover:bg-red-700 rounded-full h-8 w-8 flex items-center justify-center" onclick="changeAtiveTab(event,'tab-address')">2</a>
+                                            </li>
+                                            <li class="px-2">
+                                                <a class="cursor-pointer p-2 bg-red-accent hover:bg-red-700 rounded-full h-8 w-8 flex items-center justify-center" onclick="changeAtiveTab(event,'tab-guardian')">3</a>
+                                            </li>
+                                            <li class="px-2">
+                                                <a class="cursor-pointer p-2 bg-red-accent hover:bg-red-700 rounded-full h-8 w-8 flex items-center justify-center" onclick="changeAtiveTab(event,'tab-educ')">4</a>
+                                            </li>
+                                            <li >
+                                                <div class="pointer-events-none h-8 w-8 flex items-center justify-center text-gray-800 dark:text-white">&raquo;</div>
+                                            </li>
+                                        </ul>  
                                     </div>
-                                    <div class="hidden" id="tab-educ">
-                                        <p>
-                                        Almost every day we encounter a lot of exotic animal in the forrest and it efficiently unleash cross-media information without
-                                        cross-media value. Quickly maximize timely deliverables for
-                                        real-time schemas.
-                                        <br />
-                                        <br />
-                                        Basically it dramatically maintain clicks-and-mortar solutions
-                                        without functional solutions.
-                                        </p>
-                                    </div>
-                                    <button class="float-right py-2 px-4 rounded-full bg-red-accent text-gray-100 text-sm active:outline-none focus:outline-none hover:bg-red-800 transition ease">save</button>
+                                    <button class="float-right py-2 px-4 rounded-full bg-red-accent text-gray-100 text-sm active:outline-none focus:outline-none hover:bg-red-800 transition ease" type="submit">
+                                        {{ __('save') }}
+                                    </button>
+
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
