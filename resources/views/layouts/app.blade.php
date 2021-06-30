@@ -14,7 +14,7 @@
     <meta name="theme-color" content="#ffffff">
 
     <title>@yield('title')</title>
-
+    <base href="{{ \URL::to('/') }}">
 
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
