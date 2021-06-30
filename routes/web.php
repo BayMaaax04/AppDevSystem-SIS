@@ -30,21 +30,21 @@ Route::get('/', function () {
 // Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth','PreventBackHistory']], function () {
+Route::group(['prefix'=>'administrator', 'middleware'=>['isAdmin','auth','PreventBackHistory']], function () {
     Route::get('dashboard', [AdminController::class,'index'])->name('admin.dashboard');
     Route::get('profile', [AdminController::class,'profile'])->name('admin.profile');
     Route::get('settings', [AdminController::class,'settings'])->name('admin.settings');
 });
 
-Route::group(['prefix'=>'user', 'middleware'=>['isUser','auth','PreventBackHistory']], function () {
-    Route::get('dashboard', [UserController::class,'index'])->name('user.dashboard');
+Route::group(['prefix'=>'student', 'middleware'=>['isUser','auth','PreventBackHistory']], function () {
+    Route::get('/', [UserController::class,'index'])->name('user.dashboard');
     Route::get('profile', [UserController::class,'profile'])->name('user.profile');
     Route::get('settings', [UserController::class,'settings'])->name('user.settings');
     Route::get('registration', [UserController::class,'registration'])->name('user.registration');
     Route::get('grading', [UserController::class,'grading'])->name('user.grading');
     Route::get('schedule', [UserController::class,'schedule'])->name('user.schedule');
 
-    Route::post('update-profile-info', [UserController::class,'updateInfo'])->name('userUpdateInfo');
+    Route::post('update_info', [UserController::class,'updateInfo'])->name('user.updateInfo');
 
     Route::post('update_picture', [UserController::class,'updatePicture'])->name('user.updatePicture');
 });
