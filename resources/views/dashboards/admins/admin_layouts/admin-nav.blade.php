@@ -24,7 +24,7 @@
     <link href="{{ asset('plugins/materialDashboard/material-dashboard.min.css') }}" rel="stylesheet" />
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <link href="{{ url('css/style.css') }}" rel="stylesheet">
-    <link href="{{ url('plugins/creativeTm/creativeTm.css') }}" rel="stylesheet">
+    {{-- <link href="{{ url('plugins/creativeTm/creativeTm.css') }}" rel="stylesheet"> --}}
 
     <script>
       const monthNames = ["January", "February", "March", "April", "May", "June",
@@ -464,7 +464,7 @@
 <script src="{{ asset('plugins/perfectScrollbar/perfect-scrollbar.jquery.min.js') }}"></script>
 <!-- script -->
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-<script src="plugins/creativeTm/creativeTm.js"></script>
+{{-- <script src="plugins/creativeTm/creativeTm.js"></script> --}}
 <!-- end script -->
 
 {{-- custom script --}}
