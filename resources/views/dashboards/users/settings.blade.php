@@ -2,7 +2,7 @@
 
 @section('content')
 
-<main class="p-6 m-9 bg-white dark:bg-gray-tertiary-dark rounded-xl shadow-md border-t-4 border-red-accent items-center space-x-4 mt-16">
+<main class="p-6 m-15 bg-white dark:bg-gray-tertiary-dark rounded-xl shadow-md border-t-4 border-red-accent items-center space-x-4 mt-20">
     <div class="flex-shrink-0">
         <div class="max-w-sm mx-auto space-y-9">
             <section class="p-4 rounded-xl shadow-md divide-y-2 dark:bg-gray-primary-dark">

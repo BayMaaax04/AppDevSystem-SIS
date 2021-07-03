@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+
 <main class="sm:container sm:mx-auto sm:mt-2 text-sm">
     <div class="w-full sm:px-30">
 
@@ -74,6 +75,7 @@
 
                         {{-- Start Tabs --}}
                         <form  id="userInfoForm" method="POST" action="{{ route('user.updateInfo') }}">
+                            @csrf
                             {{-- @csrf --}}
                             <!-- Equivalent to... -->
                             {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}" /> --}}
@@ -85,30 +87,45 @@
                                         <div class="block" id="tab-info">
                                             <h1 class="text-lg font-bold lg:ml-32 mb-3 flex">Personal Details</h1>
                                             <div class="flex flex-col lg:flex-row ">
-                                                <input class="appearance-none w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 hidden"  id="email" type="text" placeholder="email" value="{{Auth::user()->email}}" name="email" readonly >
+                                                <input class="appearance-none w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 hidden"  id="email" type="text" placeholder="email" value="{{Auth::user()->email}}" name="email" readonly >
                                             </div>
                                             <div class="flex flex-col lg:flex-row ">
-                                                <label class="w-36 tracking-wide font-bold text-xs h-6 mx-2 mt-3 text-gray-500" for="lastname">Lastname *</label>
+                                                <label class="w-36 tracking-wide font-bold text-xs h-6 mx-2 mt-3 text-gray-500" for="lastname">Lastname :</label>
                                                 <div class="block w-full">
-                                                    <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="lastname" type="text" placeholder="Lastname" value="{{Auth::user()->lastname}}" name="lastname">
-                                                    <span class="text-sm text-red-accent italic error-text lastname_error"></span>
+                                                    <input class="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none   cursor-default @error('lastname') border-red-500 @enderror" "  id="lastname" type="text" placeholder="Lastname" value="{{Auth::user()->lastname}}" name="lastname" readonly>
+
+                                                    @error('lastname')
+                                                    <p class="text-red-500 text-xs italic mt-4">
+                                                        {{ $message }}
+                                                    </p>
+                                                    @enderror
                                                 </div>
                                             </div>
 
                                             <div class="pt-2 flex flex-col lg:flex-row ">
-                                                <label class="w-36 tracking-wide font-bold text-xs h-6 mx-2 mt-3 text-gray-500" for="firstname">Firstname *</label>
+                                                <label class="w-36 tracking-wide font-bold text-xs h-6 mx-2 mt-3 text-gray-500" for="firstname">Firstname :</label>
                                                 <div class="block w-full">
-                                                    <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="firstname" type="text" placeholder="Firstname" value="{{Auth::user()->firstname}}" name="firstname">
-                                                    <span class="text-sm text-red-accent italic error-text firstname_error"></span>
+                                                    <input class="appearance-none block w-full bg-gray-100 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none   cursor-default @error('firstname') border-red-500 @enderror"  id="firstname" type="text" placeholder="Firstname" value="{{Auth::user()->firstname}}" name="firstname" readonly>
+
+                                                    @error('firstname')
+                                                    <p class="text-red-500 text-xs italic mt-4">
+                                                        {{ $message }}
+                                                    </p>
+                                                    @enderror
                                                 </div>
                                             </div>
 
                                             <div class="pt-2 flex flex-col lg:flex-row ">
-                                                <label class="w-36 tracking-wide font-bold text-xs h-6 mx-2 mt-3 text-gray-500" for="middlename">Middlename *</label>
+                                                <label class="w-36 tracking-wide font-bold text-xs h-6 mx-2 mt-3 text-gray-500" for="middlename">Middlename :</label>
 
                                                 <div class="block w-full">
-                                                    <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="middlename" type="text" placeholder="Middlename"  name="middlename" value="{{Auth::user()->middlename}}">
-                                                    <span class="text-sm text-red-accent italic error-text middlename_error"></span>
+                                                    <input class="appearance-none block w-full bg-gray-100 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none   cursor-default @error('middlename') border-red-500 @enderror"  id="middlename" type="text" placeholder="Middlename"  name="middlename" value="{{Auth::user()->middlename}}" readonly>
+
+                                                    @error('middlename')
+                                                    <p class="text-red-500 text-xs italic mt-4">
+                                                        {{ $message }}
+                                                    </p>
+                                                    @enderror
                                                 </div>
                                             </div>
 
@@ -307,25 +324,52 @@
                 url:$(this).attr('action'),
                 method:$(this).attr('method'),
                 data:new FormData(this),
+                dataType: 'json',
+                type:'post',
                 processData:false,
-                dataType:'json',
                 contentType:false,
-                beforeSend:function(){
-                    $(document).find('span.error-text').text('');
-                },
                 success:function(data){
-                    if (data.status == 0) {
-                        $.each(data.error, function(prefix, val) {
-                            $('span.'+prefix+'_error').text(val[0]);
-                        });
-                    } else {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top',
+                        width:500,
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
 
-                        alert(data.msg);
-                    }
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Profile information updated successfully.'
+                    })
+                },
+                error:function(data){
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top',
+                        width:500,
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'Something went wrong, Please try again.'
+                    })
                 },
             });
         });
     });
+
     flatpickr("#grid-birthday", {
         altInput: true,
         altFormat: "F j, Y",
@@ -437,26 +481,47 @@
 
 
 </script>  
-@endsection
-@section('scripts')
-    @if (session('status'))
-        <script>
-            const Toast = Swal.mixin({
-                toast: true,
-                position: 'top',
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-            })
 
-            Toast.fire({
-                icon: 'success',
-                title: '{{ session('status') }}'
-            })
-        </script>
-    @endif
+@if (session('status'))
+<script>
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
+
+    Toast.fire({
+        icon: 'success',
+        title: '{{ session('status') }}'
+    })
+</script>
+@endif
+
+
+@if ( Session::get('success'))
+<script>
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
+
+    Toast.fire({
+        icon: 'success',
+        title: '{{ Session::post('success') }}'
+    })
+</script>
+@endif
 @endsection
