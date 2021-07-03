@@ -43,10 +43,15 @@ Route::group(['prefix'=>'student', 'middleware'=>['isUser','auth','PreventBackHi
     Route::get('registration', [UserController::class,'registration'])->name('user.registration');
     Route::get('grading', [UserController::class,'grading'])->name('user.grading');
     Route::get('schedule', [UserController::class,'schedule'])->name('user.schedule');
+    Route::get('account_settings', [UserController::class,'accountSettings'])->name('user.accountSettings');
 
     Route::post('update_info', [UserController::class,'updateInfo'])->name('user.updateInfo');
 
     Route::post('update_picture', [UserController::class,'updatePicture'])->name('user.updatePicture');
+
+    Route::post('change_password', [UserController::class,'changePassword'])->name('user.changePassword');
+
+
 });
 
 Route::get('reset-password/{token}', 'App\Http\Controllers\Auth\ResetPasswordController@getPassword');
