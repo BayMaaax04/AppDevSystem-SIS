@@ -8,11 +8,11 @@
 <main class="sm:container sm:mx-auto sm:mt-2 text-sm">
     <div class="w-full sm:px-30">
 
-        @if (session('status'))
+        {{-- @if (session('status'))
             <div class="text-sm border border-t-8 rounded text-green-700 border-green-600 bg-green-100 px-3 py-4 mb-4" role="alert">
                 {{ session('status') }}
             </div>
-        @endif
+        @endif --}}
 
         <section class="flex flex-col break-words">
             <div class="lg:mx-20 mx-2 my-2">
@@ -32,8 +32,8 @@
 
                             <input type="file" name="user_image" id="user_image" class="hidden opacity-0"/>
 
-                            <a href="javascript:void(0)" id="change-picture-btn" class="w-9 h-9 transition-colors duration-200 rounded-xl cursor-pointer">
-                                <svg class="lg:w-11 lg:h-11 w-9 h-9 transform lg:-translate-y-52 -translate-y-40 md:-translate-y-44 lg:translate-x-32 md:translate-x-15 translate-x-10 stroke-current bg-red-accent hover:bg-gray-100 text-gray-200 hover:text-red-accent p-2 rounded-full " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                            <a href="javascript:void(0)" id="change-picture-btn" class="w-9 h-9 cursor-default pointer-events-none">
+                                <svg class="cursor-pointer pointer-events-auto lg:w-11 lg:h-11 w-9 h-9 transform lg:-translate-y-52 -translate-y-40 md:-translate-y-44 lg:translate-x-32 md:translate-x-15 translate-x-10 stroke-current bg-red-accent hover:bg-gray-100 text-gray-200 hover:text-red-accent p-2 rounded-full transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                             </a>  
                         </div>
 
@@ -69,13 +69,14 @@
                                 </li>
                             </ul>  
                         </div>
+                        
                         <div class="lg:p-2 border-t border-gray-400 dark:border-dark-50 lg:flex hidden "></div>
 
                         {{-- Start Tabs --}}
-                        <form  method="POST" action="{{ route('userUpdateInfo') }}" id="userInfoForm">
-                            @csrf
+                        <form  id="userInfoForm" method="POST" action="{{ route('user.updateInfo') }}">
+                            {{-- @csrf --}}
                             <!-- Equivalent to... -->
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                            {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}" /> --}}
                             
                             <div class="flex flex-col min-w-0 break-words bg-white dark:bg-transparent text-gray-700 dark:text-gray-50 w-full mb-6">
                                 <div class="lg:px-20 px-2 py-5 flex-auto">
@@ -84,33 +85,30 @@
                                         <div class="block" id="tab-info">
                                             <h1 class="text-lg font-bold lg:ml-32 mb-3 flex">Personal Details</h1>
                                             <div class="flex flex-col lg:flex-row ">
-                                                <input class="appearance-none w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 hidden"  id="grid-email" type="text" placeholder="email" value="{{Auth::user()->email}}" name="email" readonly >
+                                                <input class="appearance-none w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 hidden"  id="email" type="text" placeholder="email" value="{{Auth::user()->email}}" name="email" readonly >
                                             </div>
                                             <div class="flex flex-col lg:flex-row ">
-                                                <div class="w-36 tracking-wide font-bold text-xs h-6 mx-2 mt-3 text-gray-500">Lastname *</div>
-                                                <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="lastname" type="text" placeholder="Lastname" value="{{Auth::user()->lastname}}" name="lastname">
-                                                <span class="text-sm text-red-accent italic error-text lastname-error"></span>
+                                                <label class="w-36 tracking-wide font-bold text-xs h-6 mx-2 mt-3 text-gray-500" for="lastname">Lastname *</label>
+                                                <div class="block w-full">
+                                                    <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="lastname" type="text" placeholder="Lastname" value="{{Auth::user()->lastname}}" name="lastname">
+                                                    <span class="text-sm text-red-accent italic error-text lastname_error"></span>
+                                                </div>
                                             </div>
 
                                             <div class="pt-2 flex flex-col lg:flex-row ">
-                                                <div class="w-36 tracking-wide font-bold text-xs h-6 mx-2 mt-3 text-gray-500">Firstname *</div>
-                                                <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="firstname" type="text" placeholder="Firstname" value="{{Auth::user()->firstname}}" name="firstname">
-                                                <span class="text-sm text-red-accent italic error-text firstname-error"></span>
+                                                <label class="w-36 tracking-wide font-bold text-xs h-6 mx-2 mt-3 text-gray-500" for="firstname">Firstname *</label>
+                                                <div class="block w-full">
+                                                    <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="firstname" type="text" placeholder="Firstname" value="{{Auth::user()->firstname}}" name="firstname">
+                                                    <span class="text-sm text-red-accent italic error-text firstname_error"></span>
+                                                </div>
                                             </div>
 
                                             <div class="pt-2 flex flex-col lg:flex-row ">
-                                                <div class="w-36 tracking-wide font-bold text-xs h-6 mx-2 mt-3 text-gray-500">Middlename *</div>
+                                                <label class="w-36 tracking-wide font-bold text-xs h-6 mx-2 mt-3 text-gray-500" for="middlename">Middlename *</label>
 
                                                 <div class="block w-full">
                                                     <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="middlename" type="text" placeholder="Middlename"  name="middlename" value="{{Auth::user()->middlename}}">
-
-                                                    {{-- @error('middlename')
-                                                    <p class="text-red-500 text-xs italic mt-4">
-                                                        {{ $message }}
-                                                    </p>
-                                                    @enderror --}}
-                                                    <span class="text-sm text-red-accent italic error-text middlename-error"></span>
-
+                                                    <span class="text-sm text-red-accent italic error-text middlename_error"></span>
                                                 </div>
                                             </div>
 
@@ -274,7 +272,7 @@
                                         </ul>  
                                     </div>
                                     <button class="float-right py-2 px-4 rounded-full bg-red-accent text-gray-100 text-sm active:outline-none focus:outline-none hover:bg-red-800 transition ease" type="submit">
-                                        {{ __('save') }}
+                                        {{ __('Update Profile') }}
                                     </button>
 
                                 </div>
@@ -292,41 +290,42 @@
 
 @section('scripts')
 <script>
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-   
-    $(function () {
-      // Update personal Info
-      $('#userInfoForm').on('submit', function(e){
-        e.preventDefault();
-
-        $.ajax({
-          url:$(this).attr('action'),
-          method:$(this).attr('method'),
-          data:new FormData(this),
-          processData:false,
-          dataType:'json',
-          contentType:false,
-          beforeSend:function(){
-            $(document).find('span.error-text').text('');
-          },
-          success:function(data){
-            if(data.status == 0){
-              $.each(data.error, function(prefix, val){
-                $('span.'+prefix+'_error').text(val[0]); 
-              });
-            }else{
-              $('#userInfoForm')[0].reset();
-              alert(data.msg);
+    $(document).ready(function() {
+        $.ajaxSetup({
+            headers:{
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
-          }
         });
-      });
-    });
 
+
+
+        // Update personal Info
+        $('#userInfoForm').on('submit', function(e){
+            e.preventDefault();
+
+            $.ajax({
+                url:$(this).attr('action'),
+                method:$(this).attr('method'),
+                data:new FormData(this),
+                processData:false,
+                dataType:'json',
+                contentType:false,
+                beforeSend:function(){
+                    $(document).find('span.error-text').text('');
+                },
+                success:function(data){
+                    if (data.status == 0) {
+                        $.each(data.error, function(prefix, val) {
+                            $('span.'+prefix+'_error').text(val[0]);
+                        });
+                    } else {
+
+                        alert(data.msg);
+                    }
+                },
+            });
+        });
+    });
     flatpickr("#grid-birthday", {
         altInput: true,
         altFormat: "F j, Y",
@@ -411,23 +410,25 @@
           .getElementById("tabs-id")
           .querySelectorAll(".tab-content > div");
       for (let i = 0; i < aElements.length; i++) {
-          aElements[i].classList.remove("text-gray-800");
+          aElements[i].classList.remove("lg:text-gray-800");
           aElements[i].classList.remove("border-red-accent");
-          aElements[i].classList.add("text-gray-500");
+          aElements[i].classList.add("lg:text-gray-500");
+          aElements[i].classList.add("text-gray-50");
 
-          aElements[i].classList.remove("dark:text-gray-50");
-          aElements[i].classList.remove("dark:border-gray-200");
-          aElements[i].classList.add("dark:text-gray-500");
+          aElements[i].classList.remove("lg:dark:text-gray-50");
+          aElements[i].classList.remove("lg:dark:border-gray-200");
+          aElements[i].classList.add("lg:dark:text-gray-500");
 
           tabContents[i].classList.add("hidden");
           tabContents[i].classList.remove("block");
       }
-      element.classList.remove("text-gray-500");
-      element.classList.add("text-gray-800");
+      element.classList.remove("lg:text-gray-500");
+      element.classList.remove("text-gray-50");
+      element.classList.add("lg:text-gray-800");
       element.classList.add("border-red-accent");
 
-      element.classList.remove("dark:text-gray-500");
-      element.classList.add("dark:text-gray-50");
+      element.classList.remove("lg:dark:text-gray-500");
+      element.classList.add("lg:dark:text-gray-50");
 
       document.getElementById(tabID).classList.remove("hidden");
       document.getElementById(tabID).classList.add("block");
@@ -436,4 +437,26 @@
 
 
 </script>  
+@endsection
+@section('scripts')
+    @if (session('status'))
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: 'success',
+                title: '{{ session('status') }}'
+            })
+        </script>
+    @endif
 @endsection

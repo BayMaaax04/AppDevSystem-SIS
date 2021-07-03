@@ -10,11 +10,11 @@
         <div class="lg:w-2/4 w-full">
             <section class="flex flex-col items-center break-words bg-white sm:border-1 sm:rounded-md py-10">
 
-                @if (session('status'))
+                {{-- @if (session('status'))
                     <div class="text-sm border border-t-8 rounded text-green-700 border-green-600 bg-green-100 px-3 py-4 mb-4" role="alert">
                         {{ session('status') }}
                     </div>
-                @endif
+                @endif --}}
                 <header class="flex flex-col items-center">
                     {{-- Undraw Image --}}
                     <div class="h-40 w-40 rounded-full overflow-hidden border-2 border-red-accent">
@@ -152,5 +152,27 @@
 
     })
 </script>
+
+@if (session('status'))
+<script>
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        width: 530,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
+
+    Toast.fire({
+        icon: 'success',
+        title: '{{ session('status') }}'
+    })
+</script>
+@endif
     
 @endsection
