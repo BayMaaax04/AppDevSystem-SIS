@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Validator;
+// use Illuminate\Validation\Validator;
+use Validator;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
@@ -37,28 +38,66 @@ class UserController extends Controller
         return view ('dashboards.users.settings');
     }
 
+
     function updateInfo(Request $request){
         $validator = Validator::make($request->all(),[
             'lastname'=>'required',
             'firstname'=>'required',
             'middlename'=>'required',
-            'email'=>['required','email','unique:users'.Auth::user()->id]
+            'gender'=>'required|string',
+            'civil_status'=>'required',
+            'birthday'=>'required',
+            'birthplace'=>'required',
+            'religion'=>'required',
+            'nationality'=>'required',
+            'address'=>'required',
+            'city'=>'required',
+            'province'=>'required',
+            'zipcode'=>'required',
+            'guardianName'=>'required',
+            'guardianNumber'=>'required',
+            'guardianAddress'=>'required',
+
+            // 'email'=>[
+            //     'required',
+            //     'email',
+            //     'unique:users'.Auth::user()->id
+            // ]
         ]);
 
         if($validator->fails()){
             return response()->json(['status'=>0,'error'=>$validator->errors()->toArray()]);
         }else{
-            // $query = User::find(Auth::user()->id)->update([
-            //     'lastname'=>$request->lastname,
-            //     'firstname'=>$request->firstname,
-            //     'middlename'=>$request->middlename,
-            // ]);
+            $query = User::find(Auth::user()->id)->update([
+                'lastname'=>$request->lastname,
+                'firstname'=>$request->firstname,
+                'middlename'=>$request->middlename,
+                'gender'=>$request->gender,
+                'civil_status'=>$request->civil_status,
+                'birthday'=>$request->birthday,
+                'birthplace'=>$request->birthplace,
+                'religion'=>$request->religion,
+                'nationality'=>$request->nationality,
+                'address'=>$request->address,
+                'city'=>$request->city,
+                'province'=>$request->province,
+                'zipcode'=>$request->zipcode,
+                'guardianName'=>$request->guardianName,
+                'guardianNumber'=>$request->guardianNumber,
+                'guardianAddress'=>$request->guardianAddress,
+            ]);
 
-            // if(!$query){
-            //     return response()->json(['status'=>0,'msg'=>'Something went wrong.']);
-            // }else{
-            //     return response()->json(['status'=>1,'msg'=>'Your profile info has been updated successfully.']);
-            // }
+            if(!$query){
+                return response()->json([
+                    'status'=>0,
+                    'msg'=>'Something went wrong.'
+                ]);
+            }else{
+                return response()->json([
+                    'status'=>1,
+                    'msg'=>'Your profile info has been updated successfully.'
+                ]);
+            }
         }
     }
 
@@ -93,21 +132,6 @@ class UserController extends Controller
     }
 
     function changePassword(Request $request){
-        // Validate Form
-        // $validator = \Validator::make($request->all(),[
-        //     'currentPassword'=>[
-        //         'required', function($attribute, $value, $fail){
-        //             if ( !Hash::check($value, Auth::user()->password)){
-        //                 return $fail(_('The current password is incorrect'));
-        //             }
-        //         },
-        //         'min:8',
-        //         'max:30'
-        //     ],
-        //     'newPassword'=>'required|min:8|max:30',
-        //     'cnewPassword'=>'required|same:newPassword'
-        // ]);
-
         $request->validate([
             'currentPassword'=>[
                 'required', function($attribute, $value, $fail){

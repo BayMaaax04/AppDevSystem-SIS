@@ -65,9 +65,6 @@
                                     <a class="lg:p-2 py-1 lg:px-2 px-0 block border-b-2 border-transparent hover:border-red-accent hover:text-gray-800 text-gray-500  cursor-pointer
                                     dark:hover:border-red-accent dark:text-gray-500 dark:hover:text-gray-50" " onclick="changeAtiveTab(event,'tab-guardian')">Guardian</a>
                                 </li>
-                                <li>
-                                    <a class="lg:p-2 py-1 lg:px-2 px-0 block border-b-2 border-transparent hover:border-red-accent hover:text-gray-800 text-gray-500  cursor-pointer dark:hover:border-red-accent dark:text-gray-500 dark:hover:text-gray-50" " onclick="changeAtiveTab(event,'tab-educ')">Education</a>
-                                </li>
                             </ul>  
                         </div>
                         
@@ -138,25 +135,40 @@
                                                 </div>   
                                                 <div class="w-full flex flex-col lg:flex-row">
                                                     <div class="w-full lg:px-3 lg:mb-6 mb-0">
-                                                        <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2" for="grid-gender">
+                                                        <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2" for="gender">
                                                             Gender
                                                         </label>
                                                         <div class="relative">
-                                                            <select class=" appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="grid-gender">
-                                                            <option value="0">Male</option>
-                                                            <option value="1">Female</option>
+                                                            <select class=" appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="gender" name="gender">
+                                                                <option selected disabled>Please select...</option>
+                                                                <option value="male" {{ Auth::user()->gender == 'Male' ? 'selected' : '' }}>Male</option>
+                                                                <option value="female" {{ Auth::user()->gender == 'Female' ? 'selected' : '' }}>Female</option>
                                                             </select>
+
                                                             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
-                                                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="w-full lg:px-3 lg:mb-6 mb-0">
-                                                        <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2" for="grid-civilstat">
+                                                        <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2" for="civil_status">
                                                         Civil Status
                                                         </label>
-                                                        <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="grid-civilstat" type="text" placeholder="" name="civilstat">
-                                                        <span class="text-sm text-red-accent italic error-text civilstat-error"></span>
+
+                                                        <div class="relative">
+                                                            <select class=" appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="civil_status" name="civil_status">
+                                                                <option selected disabled>Please select...</option>
+                                                                <option value="single" {{ Auth::user()->civil_status == 'Single' ? 'selected' : '' }}>Single</option>
+                                                                <option value="married" {{ Auth::user()->civil_status == 'Married' ? 'selected' : '' }}>Married</option>
+                                                                <option value="widowed" {{ Auth::user()->civil_status == 'Widowed' ? 'selected' : '' }}>Widowed</option>
+                                                                <option value="separated" {{ Auth::user()->civil_status == 'Separated' ? 'selected' : '' }}>Separated</option>
+                                                                <option value="divorced" {{ Auth::user()->civil_status == 'Divorced' ? 'selected' : '' }}>Divorced</option>
+                                                            </select>
+
+                                                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
+                                                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -166,18 +178,17 @@
                                                 </div>   
                                                 <div class="w-full flex flex-col lg:flex-row">
                                                     <div class="w-full lg:px-3 lg:mb-6 mb-0">
-                                                        <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2" for="grid-birthday">
+                                                        <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2" for="birthday">
                                                         Birthday
                                                         </label>
-                                                        <input class="appearance-none cursor-pointer block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="grid-birthday" type="date" placeholder="" name="birthday">
-                                                        <span class="text-sm text-red-accent italic error-text birthday-error"></span>
+                                                        <input class="appearance-none cursor-pointer block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="birthday" type="date" placeholder="" name="birthday" value="{{Auth::user()->birthday}}">
                                                     </div>
                                                     <div class="w-full lg:px-3 lg:mb-6 mb-0">
-                                                        <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2" for="grid-birthplace">
+                                                        <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2" for="birthplace">
                                                         Birthplace
                                                         </label>
-                                                        <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="grid-birthplace" type="text" placeholder="" name="birthplace">
-                                                        <span class="text-sm text-red-accent italic error-text birthplace-error"></span>
+                                                        <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="birthplace" type="text" placeholder="" name="birthplace" value="{{Auth::user()->birthplace}}">
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -187,18 +198,18 @@
                                                 </div>   
                                                 <div class="w-full flex flex-col lg:flex-row">
                                                     <div class="w-full lg:px-3 lg:mb-6 mb-0">
-                                                        <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2" for="grid-religion">
+                                                        <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2" for="religion">
                                                         Religion
                                                         </label>
-                                                        <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="grid-religion" type="text" placeholder="" name="religion">
-                                                        <span class="text-sm text-red-accent italic error-text religion-error"></span>
+                                                        <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="religion" type="text" placeholder="" name="religion" value="{{Auth::user()->religion}}">
+
                                                     </div>
                                                     <div class="w-full lg:px-3 lg:mb-6 mb-0">
-                                                        <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2" for="grid-nationality">
+                                                        <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2" for="nationality">
                                                         Nationality
                                                         </label>
-                                                        <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="grid-nationality" type="text" placeholder="" name="nationality">
-                                                        <span class="text-sm text-red-accent italic error-text nationality-error"></span>
+                                                        <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="nationality" type="text" placeholder="" name="nationality" value="{{Auth::user()->nationality}}">
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -206,65 +217,69 @@
                                         </div>
                                         {{-- Address Tab --}}
                                         <div class="hidden" id="tab-address">
-                                            <h1 class="text-lg font-bold lg:ml-32 mb-3 flex"> Full Address</h1>
-                                            <address class="flex flex-col lg:flex-row ">
-                                                <div class="w-36 tracking-wide font-bold h-6 mx-2 mt-3 text-gray-500" for="grid-housenum">House Number</div>
-                                                <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="grid-housenum" type="number" placeholder="House Number" name="houseno">
-                                                <span class="text-sm text-red-accent italic error-text houseno-error"></span>
-                                            </address>
-                                            <address class="pt-2 flex flex-col lg:flex-row ">
-                                                <div class="w-36 tracking-wide font-bold h-6 mx-2 mt-3 text-gray-500" for="grid-street-name">Street Name</div>
-                                                <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="grid-street-name" type="text" placeholder="Street Name" name="streetname">
-                                                <span class="text-sm text-red-accent italic error-text streetname-error"></span>
-                                            </address>
-                                            <address class="pt-2 flex flex-col lg:flex-row ">
-                                                <div class="w-36 tracking-wide font-bold h-6 mx-2 mt-3 text-gray-500" for="grid-barangay">Barangay</div>
-                                                <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="grid-barangay" type="text" placeholder="Barangay / District" name="barangay">
-                                                <span class="text-sm text-red-accent italic error-text barangay-error"></span>
-                                            </address>
+                                            <h1 class="text-lg font-bold lg:ml-32 mb-3 flex"> Residential Address</h1>
+                                            <div class="flex flex-col lg:flex-row ">
+                                                <div class="w-36 tracking-wide font-bold text-xs h-6 mx-2 mt-3 text-gray-500" for="address">Address</div>
+                                                <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="address" type="text" placeholder="Address" name="address" value="{{Auth::user()->address}}">
 
-                                            <address class="pt-2 flex flex-col lg:flex-row ">
-                                                <div class="w-36 tracking-wide font-bold h-6 mx-2 mt-3 text-gray-500" for="grid-city">City</div>
-                                                <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="grid-city" type="text" placeholder="City" name="city">
-                                                <span class="text-sm text-red-accent italic error-text city-error"></span>
-                                            </address>
-                                            <address class="pt-2 flex flex-col lg:flex-row ">
-                                                <div class="w-36 tracking-wide font-bold h-6 mx-2 mt-3 text-gray-500" for="grid-province">Province</div>
-                                                <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="grid-province" type="text" placeholder="Province" name="province">
-                                                <span class="text-sm text-red-accent italic error-text province-error"></span>
-                                            </address>
-                                            <address class="pt-2 flex flex-col lg:flex-row ">
-                                                <div class="w-36 tracking-wide font-bold h-6 mx-2 mt-3 text-gray-500" for="grid-zipcode">Zip Code</div>
-                                                <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="grid-zipcode" type="number" placeholder="Zip Code" min="400" max="9811"  inputmode="numeric" pattern="^(?(^00000(|-0000))|(\d{5}(|-\d{4})))$" name="zipcode">
-                                                <span class="text-sm text-red-accent italic error-text zipcode-error"></span>
-                                            </address>
+
+                                            </div>
+
+                                            <div class="pt-2 flex flex-col lg:flex-row ">
+                                                <div class="w-36 tracking-wide font-bold text-xs h-6 mx-2 mt-3 text-gray-500" for="city">City</div>
+                                                <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="city" type="text" placeholder="City" name="city" value="{{Auth::user()->city}}">
+
+                                            </div>
+                                            <div class="pt-2 flex flex-col lg:flex-row ">
+                                                <div class="w-36 tracking-wide font-bold text-xs h-6 mx-2 mt-3 text-gray-500" for="province">Province</div>
+                                                <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="province" type="text" placeholder="Province" name="province" value="{{Auth::user()->province}}">
+
+                                            </div>
+                                            <div class="pt-2 flex flex-col lg:flex-row ">
+                                                <div class="w-36 tracking-wide font-bold text-xs h-6 mx-2 mt-3 text-gray-500" for="zipcode">Zip Code</div>
+                                                <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="zipcode" type="number" placeholder="Zip Code" min="400" max="9811"  inputmode="numeric" pattern="^(?(^00000(|-0000))|(\d{5}(|-\d{4})))$" name="zipcode" value="{{Auth::user()->zipcode}}">
+
+                                            </div>
 
                                             <div class="flex flex-col lg:flex-row border-b border-gray-200 pb-4 mb-4"></div>
 
 
                                         </div>
+                                        {{-- Guardian Tab --}}
                                         <div class="hidden" id="tab-guardian">
-                                            <p>
-                                            Efficiently unleash cross-media information without
-                                            cross-media value. Quickly maximize timely deliverables for
-                                            real-time schemas.
-                                            <br />
-                                            <br />
-                                            Dramatically maintain clicks-and-mortar solutions
-                                            without functional solutions.
-                                            </p>
+                                            <h1 class="text-lg font-bold lg:ml-32 mb-3 flex">Guardian Details</h1>
+                                            <div class="flex flex-col lg:flex-row ">
+                                                <label class="w-36 tracking-wide font-bold text-xs h-6 mx-2 mt-3 text-gray-500" for="guardianName">Guardian Name</label>
+                                                <div class="block w-full">
+                                                    <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="guardianName" type="text" placeholder="Full name" value="{{Auth::user()->guardianName}}" name="guardianName">
+                                                {{-- 
+                                                    @error('lastname')
+                                                    <p class="text-red-500 text-xs italic mt-4">
+                                                        {{ $message }}
+                                                    </p>
+                                                    @enderror --}}
+                                                </div>
+                                            </div>
+
+                                            <div class="pt-2 flex flex-col lg:flex-row ">
+                                                <label class="w-36 tracking-wide font-bold text-xs h-6 mx-2 mt-3 text-gray-500" for="guardianNumber">Phone Number</label>
+                                                <div class="block w-full">
+                                                    <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="phoneNumber"  placeholder="(9xx) xxx - xxxx" name="guardianNumber" maxlength="16" value="{{Auth::user()->guardianNumber}}">
+
+                                                </div>
+                                            </div>
+
+                                            <div class="pt-2 flex flex-col lg:flex-row ">
+                                                <label class="w-36 tracking-wide font-bold text-xs h-6 mx-2 mt-3 text-gray-500" for="guardianAddress">Residential Address</label>
+                                                <div class="block w-full">
+                                                    <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="guardianAddress" type="text" placeholder="Full address" value="{{Auth::user()->guardianAddress}}" name="guardianAddress">
+
+                                                </div>
+                                            </div>
+
+                                            <div class="flex flex-col lg:flex-row border-b border-gray-200 pb-4 lg:mb-4"></div>
                                         </div>
-                                        <div class="hidden" id="tab-educ">
-                                            <p>
-                                            Almost every day we encounter a lot of exotic animal in the forrest and it efficiently unleash cross-media information without
-                                            cross-media value. Quickly maximize timely deliverables for
-                                            real-time schemas.
-                                            <br />
-                                            <br />
-                                            Basically it dramatically maintain clicks-and-mortar solutions
-                                            without functional solutions.
-                                            </p>
-                                        </div>
+
                                     </div>
                                     <div class="w-full flex lg:hidden items-center text-center justify-center">
                                         <ul class="flex item-center justify-center text-center text-sm text-white flex-wrap flex-row ">
@@ -279,9 +294,6 @@
                                             </li>
                                             <li class="px-2">
                                                 <a class="cursor-pointer p-2 bg-red-accent hover:bg-red-700 rounded-full h-8 w-8 flex items-center justify-center" onclick="changeAtiveTab(event,'tab-guardian')">3</a>
-                                            </li>
-                                            <li class="px-2">
-                                                <a class="cursor-pointer p-2 bg-red-accent hover:bg-red-700 rounded-full h-8 w-8 flex items-center justify-center" onclick="changeAtiveTab(event,'tab-educ')">4</a>
                                             </li>
                                             <li >
                                                 <div class="pointer-events-none h-8 w-8 flex items-center justify-center text-gray-800 dark:text-white">&raquo;</div>
@@ -370,7 +382,7 @@
         });
     });
 
-    flatpickr("#grid-birthday", {
+    flatpickr("#birthday", {
         altInput: true,
         altFormat: "F j, Y",
         dateFormat: "Y-m-d",
@@ -477,9 +489,58 @@
       document.getElementById(tabID).classList.remove("hidden");
       document.getElementById(tabID).classList.add("block");
   };
+    
+
+
+
+    const isNumericInput = (event) => {
+        const key = event.keyCode;
+        return ((key >= 48 && key <= 57) || // Allow number line
+            (key >= 96 && key <= 105) // Allow number pad
+        );
+    };
+
+    const isModifierKey = (event) => {
+        const key = event.keyCode;
+        return (event.shiftKey === true || key === 35 || key === 36) || // Allow Shift, Home, End
+            (key === 8 || key === 9 || key === 13 || key === 46) || // Allow Backspace, Tab, Enter, Delete
+            (key > 36 && key < 41) || // Allow left, up, right, down
+            (
+                // Allow Ctrl/Command + A,C,V,X,Z
+                (event.ctrlKey === true || event.metaKey === true) &&
+                (key === 65 || key === 67 || key === 86 || key === 88 || key === 90)
+            )
+    };
+
+    const enforceFormat = (event) => {
+        // Input must be of a valid number format or a modifier key, and not longer than ten digits
+        if(!isNumericInput(event) && !isModifierKey(event)){
+            event.preventDefault();
+        }
+    };
+
+    const formatToPhone = (event) => {
+        if(isModifierKey(event)) {return;}
+
+        // I am lazy and don't like to type things more than once
+        const target = event.target;
+        const input = event.target.value.replace(/\D/g,'').substring(0,10); // First ten digits of input only
+        const zip = input.substring(0,3);
+        const middle = input.substring(3,6);
+        const last = input.substring(6,10);
+
+        if(input.length > 6){target.value = `(${zip}) ${middle} - ${last}`;}
+        else if(input.length > 3){target.value = `(${zip}) ${middle}`;}
+        else if(input.length > 0){target.value = `(${zip})`;}
+    };
+
+    const inputElement = document.getElementById('phoneNumber');
+    console.log(inputElement);
+    inputElement.addEventListener('keydown',enforceFormat);
+    inputElement.addEventListener('keyup',formatToPhone);
+
+
     changeAtiveTab();
-
-
 </script>  
 
 @if (session('status'))
