@@ -270,6 +270,14 @@
                                             </div>
 
                                             <div class="pt-2 flex flex-col lg:flex-row ">
+                                                <label class="w-36 tracking-wide font-bold text-xs h-6 mx-2 mt-3 text-gray-500" for="guardianEmail">Email</label>
+                                                <div class="block w-full">
+                                                    <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="email"  placeholder="Email Address" name="guardianEmail" value="{{Auth::user()->guardianEmail}}">
+
+                                                </div>
+                                            </div>
+
+                                            <div class="pt-2 flex flex-col lg:flex-row ">
                                                 <label class="w-36 tracking-wide font-bold text-xs h-6 mx-2 mt-3 text-gray-500" for="guardianAddress">Residential Address</label>
                                                 <div class="block w-full">
                                                     <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="guardianAddress" type="text" placeholder="Full address" value="{{Auth::user()->guardianAddress}}" name="guardianAddress">

@@ -56,6 +56,7 @@ class UserController extends Controller
             'zipcode'=>'required',
             'guardianName'=>'required',
             'guardianNumber'=>'required',
+            'guardianEmail'=>'required',
             'guardianAddress'=>'required',
 
             // 'email'=>[
@@ -84,6 +85,7 @@ class UserController extends Controller
                 'zipcode'=>$request->zipcode,
                 'guardianName'=>$request->guardianName,
                 'guardianNumber'=>$request->guardianNumber,
+                'guardianEmail'=>$request->guardianEmail,
                 'guardianAddress'=>$request->guardianAddress,
             ]);
 
