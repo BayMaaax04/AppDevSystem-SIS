@@ -39,6 +39,7 @@ Route::group(['prefix'=>'administrator', 'middleware'=>['isAdmin','auth','Preven
 
     Route::get('students_list', [StudentController::class,'studentsList'])->name('get.student.list');
     Route::get('student_details', [StudentController::class,'studentDetails'])->name('get.student.detail');
+    Route::post('delete_student', [StudentController::class,'deleteStudents'])->name('delete.student');
 
     // Route::get('getStudentList', [AdminController::class,'getStudentList'])->name('admin.studentslist');
 });

@@ -23,9 +23,13 @@
     <link rel="stylesheet" href="{{ asset('plugins/ijaboCropTool/ijaboCropTool.min.css')}}">
     <link rel="stylesheet" href="{{ asset('plugins/materialDashboard/material-dashboard.min.css') }}"  />
     <!-- CSS only -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.2/css/uikit.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.uikit.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.9/css/fixedHeader.bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap.min.css">
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/dataTables.bootstrap.min.css" /> --}}
     @yield('styles')
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
@@ -149,12 +153,16 @@
   </div>
 
 {{-- Core js --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.0.18/sweetalert2.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/fixedheader/3.1.9/js/dataTables.fixedHeader.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
 <!-- JavaScript Bundle with Popper -->
 
 <script src="https://cdn.datatables.net/1.10.25/js/dataTables.uikit.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="{{ asset('plugins/popper/popper.min.js') }}"></script>
 <script src="{{ asset('plugins/materialDesign/bootstrap-material-design.min.js') }}"></script>
 <script src="{{ asset('plugins/perfectScrollbar/perfect-scrollbar.jquery.min.js') }}"></script>
@@ -347,6 +355,7 @@
       });
 
       $('.wrapper').perfectScrollbar();
+      $('.viewStudent').perfectScrollbar();
 
 
       $('li.active').removeClass('active');
