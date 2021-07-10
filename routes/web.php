@@ -4,6 +4,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\StudentController;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -29,12 +30,22 @@ Route::get('/', function () {
 
 // Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
 Route::group(['prefix'=>'administrator', 'middleware'=>['isAdmin','auth','PreventBackHistory']], function () {
     Route::get('dashboard', [AdminController::class,'index'])->name('admin.dashboard');
     Route::get('profile', [AdminController::class,'profile'])->name('admin.profile');
     Route::get('settings', [AdminController::class,'settings'])->name('admin.settings');
+    Route::get('students', [AdminController::class,'students'])->name('admin.students');
+
+
+    Route::get('students_list', [StudentController::class,'studentsList'])->name('get.student.list');
+    Route::get('student_details', [StudentController::class,'studentDetails'])->name('get.student.detail');
+
+    // Route::get('getStudentList', [AdminController::class,'getStudentList'])->name('admin.studentslist');
 });
+
+
+
+
 
 Route::group(['prefix'=>'student', 'middleware'=>['isUser','auth','PreventBackHistory']], function () {
     Route::get('/', [UserController::class,'index'])->name('user.dashboard');
