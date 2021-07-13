@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\ProfessorController;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -41,7 +42,15 @@ Route::group(['prefix'=>'administrator', 'middleware'=>['isAdmin','auth','Preven
     Route::get('student_details', [StudentController::class,'studentDetails'])->name('get.student.detail');
     Route::post('delete_student', [StudentController::class,'deleteStudents'])->name('delete.student');
 
-    // Route::get('getStudentList', [AdminController::class,'getStudentList'])->name('admin.studentslist');
+
+    
+    Route::get('professors', [ProfessorController::class,'professors'])->name('admin.professors');
+    Route::post('add_professor', [ProfessorController::class,'addProfessor'])->name('add.professor');
+    Route::get('professors_list', [ProfessorController::class,'professorsList'])->name('get.professor.list');
+    Route::post('professors_details', [ProfessorController::class,'professorDetails'])->name('get.professor.detail');
+    Route::post('update_professors_details', [ProfessorController::class,'updateProfessorDetails'])->name('update.professor.detail');
+    Route::post('delete_professors_details', [ProfessorController::class,'deleteProfessorDetails'])->name('delete.professor.detail');
+
 });
 
 

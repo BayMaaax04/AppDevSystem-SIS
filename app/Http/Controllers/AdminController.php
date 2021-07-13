@@ -23,11 +23,14 @@ class AdminController extends Controller
         $admin = DB::select('SELECT * FROM `users` WHERE role = 1');
         $admins = count($admin);
 
+        $professor = DB::select('select * from professors');
+        $professors = count($professor);
+
         // $latestusers = 'SELECT * FROM `users` WHERE role = 2 ORDER BY id DESC LIMIT 5';
         $latestusers = DB::select('select * from users where role = 2 order by id desc limit 5');
         // $users = User::orderBy('id', 'desc')->take(5)->get();
 
-        return view('dashboards.admins.index',compact('students', 'admins', 'latestusers'));
+        return view('dashboards.admins.index',compact('students', 'admins', 'professors','latestusers'));
     }
     function profile(){
         return view('dashboards.admins.profile');
@@ -40,50 +43,5 @@ class AdminController extends Controller
     }
 
 
-    // public function studentsList(){
-    //     // $students = DB::table('users')->get();
-    //     // $students = User::select('id','firstname','gender','email');
-    //     // $students = User::all();
-    //     $students = DB::table('users')->where('role', '2')->get();
-    //     // return DataTables::of($students)->make(true);
-    //     // return DataTables::of($students)->make(true);
-    //     return Datatables::of($students)
-    //                         ->addIndexColumn()
-    //                         ->addColumn('actions', function($row){
-    //                             return '<div>
-    //                                         <button data-id="'.$row->id.'" id="viewStudentBtn"><i class="material-icons text-info mr-2">visibility</i></button>
-    //                                         <button><i class="material-icons text-danger" >delete</i></button>
-    //                                     </div>';
-    //                         }) 
-    //                         ->rawColumns(['actions'])
-    //                         ->make(true);
 
-    // }
-
-    // get student detail
-
-    // public function studentDetails(Request $request){
-    //     $student_id = $request->id;
-
-    //     $studentDetails = User::find($student_id);
-
-
-    //     return response()->json(['details'->$studentDetails]);
-    // }
-
-
-
-
-
-
-    // public function studentDetails(Request $request){
-    //     // $studentDetails = User::find(Auth::user()->id);
-
-    //     $student_id = $request->id;
-    //     // $studentDetail = Auth::user()->id;
-    //     $studentDetails = User::find($student_id);
-    //     // $studentDetails = User::find($student_id);
-
-    //     return response()->json(['details'->$studentDetails]);
-    // }
 }

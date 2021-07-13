@@ -5,13 +5,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token -->
+    <link rel="shortcut apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
+    <link rel="shortcut icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+    <link rel="shortcut icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+    <link rel="shortcut manifest" href="/img/favicon/site.webmanifest">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/img/favicon/site.webmanifest">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
+    <meta name="shortcut msapplication-TileColor" content="#da532c">
+    <meta name="shortcut theme-color" content="#ffffff">
 
     <title>@yield('title')</title>
     <base href="{{ \URL::to('/') }}">
@@ -73,14 +73,20 @@
           </li>
           <li class="nav-item ">
             <a class="nav-link" href="./user.html">
-              <i class="material-icons">person</i>
+              <i class="material-icons">manage_accounts</i>
               <p>Pre-Registration</p>
             </a>
           </li>
           <li class="nav-item ">
             <a class="nav-link" href="{{ route('admin.students') }}">
-              <i class="material-icons">perm_contact_calendar</i>
+              <i class="material-icons">school</i>
               <p>Students</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="{{ route('admin.professors') }}">
+              <i class="material-icons">perm_contact_calendar</i>
+              <p>Professors</p>
             </a>
           </li>
 

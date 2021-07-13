@@ -35,7 +35,7 @@
                             <i class="material-icons bg-red-accent">face</i>
                             </div>
                             <p class="card-category">Total Professors</p>
-                            <h3 class="card-title"><span class="font-bold text-4xl text-red-accent">{{ 75 }}</span></h3>
+                            <h3 class="card-title"><span class="font-bold text-4xl text-red-accent">{{ $professors }}</span></h3>
                         </div>
                         <div class="card-footer">
                             {{-- <div class="stats">
