@@ -50,13 +50,14 @@ Route::group(['prefix'=>'administrator', 'middleware'=>['isAdmin','auth','Preven
     Route::post('professors_details', [ProfessorController::class,'professorDetails'])->name('get.professor.detail');
     Route::post('update_professors_details', [ProfessorController::class,'updateProfessorDetails'])->name('update.professor.detail');
     Route::post('delete_professors_details', [ProfessorController::class,'deleteProfessorDetails'])->name('delete.professor.detail');
-    
+
 
     Route::get('courses', [CourseController::class,'courses'])->name('admin.courses');
     Route::post('add_course', [CourseController::class,'addCourse'])->name('add.course');
     Route::get('courses_list', [CourseController::class,'coursesList'])->name('get.course.list');
     Route::post('courses_details', [CourseController::class,'courseDetails'])->name('get.course.detail');
     Route::post('update_courses_details', [CourseController::class,'updateCourseDetails'])->name('update.course.detail');
+    Route::post('delete_courses_details', [CourseController::class,'deleteCourseDetails'])->name('delete.course.detail');
 });
 
 

@@ -85,6 +85,18 @@ class CourseController extends Controller
         }
     }
 
+    // Delete professor
+    public function deleteCourseDetails(Request $request){
+        $courseid = $request->id;
+        $query = Course::find($courseid)->delete();
+
+        if($query){
+            return response()->json(['code'=>1, 'msg'=>'Course has been deleted from database']);
+        }else{
+            return response()->json(['code'=>0, 'msg'=>'Something went wrong, Please try again.']);
+        }
+    }
+
     // Get all professor detail
     public function courseDetails(Request $request){
         $courseid = $request->id;

@@ -78,6 +78,18 @@
             </a>
           </li>
           <li class="nav-item ">
+            <a class="nav-link" href="">
+              <i class="material-icons">view_in_ar</i>
+              <p>Subjects</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="{{ route('admin.courses') }}">
+              <i class="material-icons">view_in_ar</i>
+              <p>Courses</p>
+            </a>
+          </li>
+          <li class="nav-item ">
             <a class="nav-link" href="{{ route('admin.students') }}">
               <i class="material-icons">school</i>
               <p>Students</p>
@@ -89,12 +101,7 @@
               <p>Professors</p>
             </a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="{{ route('admin.courses') }}">
-              <i class="material-icons">view_in_ar</i>
-              <p>Professors</p>
-            </a>
-          </li>
+
           
 
           {{-- <li class="nav-item active-pro ">

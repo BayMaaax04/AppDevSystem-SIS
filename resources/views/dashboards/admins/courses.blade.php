@@ -86,7 +86,7 @@
                         });
                     }else{
                         $(form)[0].reset();
-                        // $('#course_table').DataTable().ajax.reload(null,false);
+                        $('#course_table').DataTable().ajax.reload(null,false);
                         const Toast = Swal.mixin({
                             toast: true,
                             position: 'top',
@@ -161,6 +161,61 @@
                 }
             });
         });
+
+
+        // Delete Professor record
+        $(document).on('click','#deleteCourseBtn', function(){
+            const courseid = $(this).data('id');
+            const url = "{{ route('delete.course.detail') }}" ;
+
+            Swal.fire({
+                title: 'Are you sure?',
+                html: 'Do you want to <b>delete</b> this course',
+                showCancelButton: true,
+                showCloseButton: true,
+                cancelButtonText: 'Cancel',
+                confirmButtonText: 'Yes, Delete',
+                cancelButtonColor: '#d33',
+                confirmButtonColor: '#2E8B57',
+                allowOutsideClick:false,
+            }).then(function(result){
+                if(result.value){
+                    $.post(url,{id:courseid}, function(data){
+                        if(data.code ==1){
+                            $('#course_table').DataTable().ajax.reload(null, false);
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top',
+                                width:500,
+                                showConfirmButton: false,
+                                timer: 3000,
+                                timerProgressBar: true,
+                            })
+
+                            Toast.fire({
+                                icon: 'success',
+                                title: data.msg
+                            })
+                        }else{
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top',
+                                width:500,
+                                showConfirmButton: false,
+                                timer: 3000,
+                                timerProgressBar: true,
+                            })
+
+                            Toast.fire({
+                                icon: 'error',
+                                title: data.msg
+                            })
+                        }
+                    },'json');
+                }
+
+            })
+        })
 
 
         var courseTable = $('#course_table').DataTable({
