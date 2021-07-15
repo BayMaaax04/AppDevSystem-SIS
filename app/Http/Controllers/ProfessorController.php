@@ -119,7 +119,7 @@ class ProfessorController extends Controller
         $query = Professor::find($professorid)->delete();
 
         if($query){
-            return response()->json(['code'=>1, 'msg'=>'Profile has been deleted from database']);
+            return response()->json(['code'=>1, 'msg'=>'Professor has been deleted from database']);
         }else{
             return response()->json(['code'=>0, 'msg'=>'Something went wrong, Please try again.']);
         }

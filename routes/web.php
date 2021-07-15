@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ProfessorController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\SubjectController;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -36,7 +37,7 @@ Route::group(['prefix'=>'administrator', 'middleware'=>['isAdmin','auth','Preven
     Route::get('dashboard', [AdminController::class,'index'])->name('admin.dashboard');
     Route::get('profile', [AdminController::class,'profile'])->name('admin.profile');
     Route::get('settings', [AdminController::class,'settings'])->name('admin.settings');
-    Route::get('students', [AdminController::class,'students'])->name('admin.students');
+    Route::get('students', [AdminController::class,'students'])->name('admin.students'); 
 
 
     Route::get('students_list', [StudentController::class,'studentsList'])->name('get.student.list');
@@ -58,6 +59,13 @@ Route::group(['prefix'=>'administrator', 'middleware'=>['isAdmin','auth','Preven
     Route::post('courses_details', [CourseController::class,'courseDetails'])->name('get.course.detail');
     Route::post('update_courses_details', [CourseController::class,'updateCourseDetails'])->name('update.course.detail');
     Route::post('delete_courses_details', [CourseController::class,'deleteCourseDetails'])->name('delete.course.detail');
+
+
+    Route::get('subjects', [SubjectController::class,'subjects'])->name('admin.subjects');
+    Route::post('add_subject', [SubjectController::class,'addSubject'])->name('add.subject');
+    Route::post('subject_details', [SubjectController::class,'subjectDetails'])->name('get.subject.detail');
+    Route::post('update_subjects_details', [SubjectController::class,'updateSubjectDetails'])->name('update.subject.detail');
+    Route::post('delete_subjects_details', [SubjectController::class,'deleteSubjectDetails'])->name('delete.subject.detail');
 });
 
 

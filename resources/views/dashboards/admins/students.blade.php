@@ -63,6 +63,10 @@
   // Get all students
   $(document).ready(function(){
     var studentTable = $('#student_table').DataTable({
+      dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
       "processing":true,
       // info:true,
       "serverSide":true,
