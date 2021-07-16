@@ -19,9 +19,15 @@
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.0.18/sweetalert2.min.css" />
+    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css"> --}}
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.2/css/uikit.min.css"> --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.uikit.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('plugins/ijaboCropTool/ijaboCropTool.min.css')}}">
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <link href="{{ url('css/style.css') }}" rel="stylesheet">
+    @livewireStyles
 
     <style>
       #menu-toggle:checked + #menu {
@@ -31,6 +37,10 @@
       .active {
         border-bottom: 2px solid #800000; 
       }
+      /* a:hover{
+        text-decoration: none;
+        color: #800000;
+      } */
     </style>
 
 </head>
@@ -63,13 +73,10 @@
 
                   <ul class="lg:flex item-center justify-between text-base text-gray-800 dark:text-white pt-4 lg:pt-0" id="navbar">
                     <li>
-                      <a href="{{ route('user.dashboard') }}" class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-red-accent" id="nav-links">{{ __('Home') }}</a>
+                      <a href="{{ route('user.dashboard') }}" class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-red-accent dark:hover:text-white" id="nav-links">{{ __('Home') }}</a>
                     </li>
                     <li>
                       <a href="{{ route('user.registration') }}" class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-red-accent" id="nav-links">{{ __('Registration') }}</a>
-                    </li>
-                    <li>
-                      <a href="{{ route('user.grading') }}" class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-red-accent" id="nav-links">{{ __('Grading') }}</a>
                     </li>
                     <li>
                       <a href="{{ route('user.schedule') }}" class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-red-accent" id="nav-links">{{ __('Schedule') }}</a>
@@ -148,18 +155,28 @@
   <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.0.1/dist/alpine.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.0.18/sweetalert2.min.js"></script>
+
   <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script> 
   <script src="{{ asset('plugins/ijaboCropTool/ijaboCropTool.min.js') }}"></script> 
   <script src="{{ asset('plugins/perfectScrollbar/perfect-scrollbar.jquery.min.js') }}"></script>
   <script src="{{ asset('js/app.js') }}"></script>
   <script src="{{ asset('js/scripts.js') }}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
   <script>
     $(document).ready(function() {
       $('.wrapper').perfectScrollbar();
+
+      $('#registration_table').DataTable({
+        searching: false, 
+        paging: false, 
+        info: false
+      });
+
     });
   </script>
    
-
-  @yield('scripts')
+   @yield('scripts')
+   @livewireScripts
 </body>
 </html>

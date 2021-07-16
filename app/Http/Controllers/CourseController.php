@@ -15,6 +15,8 @@ class CourseController extends Controller
 {
     //
     public function courses(){
+
+        
         return view('dashboards.admins.courses');
     }
     // Add Courses
@@ -88,6 +90,10 @@ class CourseController extends Controller
     // Delete professor
     public function deleteCourseDetails(Request $request){
         $courseid = $request->id;
+        $course = Course::with('subjects')->where('id', $courseid)->first();
+
+        $course->subjects()->wherePivot('course_id', '!=', 3)->detach();
+
         $query = Course::find($courseid)->delete();
 
         if($query){

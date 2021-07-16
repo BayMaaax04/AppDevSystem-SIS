@@ -1,5 +1,9 @@
 @extends('dashboards.admins.admin_layouts.admin-nav')
 
+@section('title')
+  PUP Student Portal | Subjects  
+@endsection
+
 @section('content')
 <main class="main-panel">
   <div class="w-full">
@@ -18,7 +22,6 @@
             <button class="btn btn-sm mr-4 sm:mr-2 bg-red-accent hover:border-red-800 mx-2 absolute right-0" id="addSubjectBtn" >add new subject</button>
         </div>
 
-        
       
           <div class="col">
             <div class="mt-4">
@@ -38,13 +41,17 @@
                             
                           <div class="tab-pane fade show w-full {{ $loop->first ? 'active' : '' }} table-responsive" id="v-pills-{{ $course->id }}" role="tabpanel" aria-labelledby="v-pills-{{ $course->id }}-tab">
                             
-                            <table class="display nowrap uk-table uk-table-hover uk-table-striped subject_tables" id="subject_table_{{$course->id}}" style="width: 100%">
+                            <table class="display nowrap uk-table uk-table-hover uk-table-striped subject_tables responsive" id="subject_table_{{$course->id}}" style="width: 100%">
                               <thead class="text-red-accent">
                                 <tr>
                                   <th>Subject</th>
                                   <th>Title</th>
                                   <th>Unit</th>
                                   <th>Description</th>
+                                  <th>Professor</th>
+                                  <th>Day of the week</th>
+                                  <th>Start Time</th>
+                                  <th>End Time</th>
                                   <th>Actions</th>
                                 </tr>
                                 </thead>
@@ -57,6 +64,14 @@
                                     <td> {{ $subject->subject_unit}} </td>
                                     <td> {{ $subject->subject_description}} </td>
                                     <td>
+                                      @foreach($subject->professors as $prof)
+                                      {{$prof->professor_name}} @if(!$loop->last),@endif
+                                      @endforeach
+                                    </td>
+                                    <td> {{ $subject->day_of_week }} </td>
+                                    <td> {{ $subject->start_time}} </td>
+                                    <td> {{ $subject->end_time}} </td>
+                                    <td>
                                         <button data-id="{{$subject->id}}" data-placement="bottom" id="editSubjectBtn"><i class="material-icons text-warning mr-2">edit</i></button>
 
                                         <button data-id="{{$subject->id}}" data-placement="bottom" id="deleteSubjectBtn"><i class="material-icons text-danger" >delete</i></button>
@@ -67,9 +82,6 @@
                             </table>
                         
                           </div>
-
-
-
                         @endforeach
 
                       </div>
@@ -98,13 +110,37 @@
       });
       const subjectTables = document.querySelectorAll('.subject_tables');
 
+      $("#day_of_week option:selected").text()
 
       subjectTables.forEach((item)=>{
-        const data = $(`#${item.id}`).DataTable();
+        const data = $(`#${item.id}`).DataTable({
+          responsive: true
+        });
         new $.fn.dataTable.FixedHeader(data);
       })
      
       
+      $('.day_of_week').select2({
+        placeholder: "Select the Working Days",
+        tags: true,
+        tokenSeparators: ['/',',',','," "],
+        dropdownParent: $('.editSubject')
+      });
+
+      $('.prof-picker').select2({
+        placeholder: "Select the Working Days",
+      });
+
+      flatpickr("#startTime", {
+        enableTime: true,
+        noCalendar: true,
+        dateFormat: "H:i",
+      });
+      flatpickr("#endTime", {
+        enableTime: true,
+        noCalendar: true,
+        dateFormat: "H:i",
+      });
   });
 
   // Add new subject
@@ -171,6 +207,7 @@
       const subjectid = $(this).data('id');
       $('.editSubject').find('form')[0].reset();
       $('.editSubject').find('span.error-text').text('');
+     
 
       $.post("{{ route('get.subject.detail') }}",{id:subjectid},function(data){
           $('.editSubject').find('input[name="cid"]').val(data.details.id);
@@ -178,6 +215,11 @@
           $('.editSubject').find('input[name="subject_title"]').val(data.details.subject_title);
           $('.editSubject').find('input[name="subject_unit"]').val(data.details.subject_unit);
           $('.editSubject').find('input[name="subject_description"]').val(data.details.subject_description);
+          $('.editSubject').find('select[name="professor"]').val(data.details.professor);
+          $('.editSubject').find('input[name="start_time"]').val(data.details.start_time);
+          $('.editSubject').find('input[name="end_time"]').val(data.details.end_time);
+          $('.editSubject').find('select[name="day_of_week[]"]').val(data.details.day_of_week);
+;
           $('.editSubject').modal('show');
       },'json')
   });
@@ -187,14 +229,12 @@
   $(document).on('submit', '#update-subject-form', function(e){
     e.preventDefault();
     let form = this;
-    // let datas = new FormData(form);
-    const data = {
-        cid: $(this).find('input[name="cid"]').val(),
-        subject_abbreviation: $(this).find('input[name="subject_abbreviation"]').val(),
-        subject_title: $(this).find('input[name="subject_title"]').val(),
-        subject_unit: $(this).find('input[name="subject_unit"]').val(),
-        subject_decsription: $(this).find('input[name="subject_decsription"]').val(),
-    }
+ 
+   
+    const data = $(this).find('select[name="professor"]').val()
+            
+    // console.log(data);
+    // return;
 
     $.ajax({
         url:'/administrator/update_subjects_details',
@@ -208,6 +248,10 @@
             subject_title: $(this).find('input[name="subject_title"]').val(),
             subject_unit: $(this).find('input[name="subject_unit"]').val(),
             subject_description: $(this).find('input[name="subject_description"]').val(),
+            start_time: $(this).find('input[name="start_time"]').val(),
+            end_time: $(this).find('input[name="end_time"]').val(),
+            day_of_week: $(this).find('select[name="day_of_week[]"]').val().toString(),
+            professor:$(this).find('select[name="professor"]').val()
             },
         beforeSend:function(){
             $(form).find('small.error-text').text('');
@@ -301,6 +345,8 @@
           }
 
       })
+
+
   })
 
 </script>

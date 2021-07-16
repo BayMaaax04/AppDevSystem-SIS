@@ -2,20 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\DB;
-use Validator, Input, Redirect;
-use Illuminate\Validation\Rules\Password;
-use App\Models\Professor;
+use Auth;
 use Response;
 use DataTables;
-use Auth;
+use App\Models\Subject;
+use App\Models\Professor;
+use App\Models\Course;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Validator, Input, Redirect;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rules\Password;
 
 class ProfessorController extends Controller
 {
     function professors(){
-        return view('dashboards.admins.professors');
+        $professor = Professor::with('subjects')->get();
+        return view('dashboards.admins.professors',compact('professor'));
     }
     //Add new professor
     public function addProfessor(Request $request){
@@ -116,7 +119,13 @@ class ProfessorController extends Controller
     // Delete professor
     public function deleteProfessorDetails(Request $request){
         $professorid = $request->id;
+
+        // $professor = Professor::with('subjects')->where('id', $professorid )->first();
+
+        // $professor->subject()->wherePivot('professor_id', '!=', 3)->detach();
+
         $query = Professor::find($professorid)->delete();
+
 
         if($query){
             return response()->json(['code'=>1, 'msg'=>'Professor has been deleted from database']);

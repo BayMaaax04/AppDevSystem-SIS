@@ -12,4 +12,17 @@ class Professor extends Model
     protected $fillable = [
         'professor_name', 'professor_email'
     ];
+    
+    // public function subjects(){
+    //     return $this->belongsToMany(Subject::class);
+    // }
+    /**
+     * The roles that belong to the Professor
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function subjects()
+    {
+        return $this->belongsToMany(Subject::class);
+    }
 }

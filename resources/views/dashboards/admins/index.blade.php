@@ -1,5 +1,9 @@
 @extends('dashboards.admins.admin_layouts.admin-nav')
 
+@section('title')
+  PUP Student Portal | Dashboard  
+@endsection
+
 @section('content')
     <div class="main-panel">
         <div class="w-full">

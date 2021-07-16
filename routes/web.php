@@ -69,9 +69,6 @@ Route::group(['prefix'=>'administrator', 'middleware'=>['isAdmin','auth','Preven
 });
 
 
-
-
-
 Route::group(['prefix'=>'student', 'middleware'=>['isUser','auth','PreventBackHistory']], function () {
     Route::get('/', [UserController::class,'index'])->name('user.dashboard');
     Route::get('profile', [UserController::class,'profile'])->name('user.profile');
@@ -80,6 +77,8 @@ Route::group(['prefix'=>'student', 'middleware'=>['isUser','auth','PreventBackHi
     Route::get('grading', [UserController::class,'grading'])->name('user.grading');
     Route::get('schedule', [UserController::class,'schedule'])->name('user.schedule');
     Route::get('account_settings', [UserController::class,'accountSettings'])->name('user.accountSettings');
+    Route::get('application', [UserController::class,'application'])->name('user.application'); 
+    Route::post('submit_application', [UserController::class,'submit_application'])->name('user.submitapplication'); 
 
     Route::post('update_info', [UserController::class,'updateInfo'])->name('user.updateInfo');
 

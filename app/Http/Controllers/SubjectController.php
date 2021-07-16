@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Subject;
 use App\Models\Course;
+use App\Models\Professor;
 use Validator, Input, Redirect;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\Rule;
@@ -26,10 +27,10 @@ class SubjectController extends Controller
         // $courses->subjects()->attach($subject);
         // dd($subject);
         // return;
-
-
         $courses = Course::with('subjects')->latest()->get();
-        return view('dashboards.admins.subjects', compact('courses'));
+        $professors = Professor::with('subjects')->get();
+
+        return view('dashboards.admins.subjects', compact('courses' , 'professors'));
     }
 
     // Add subject
@@ -57,7 +58,6 @@ class SubjectController extends Controller
 
             $subject->save();
         
-
             $query = $course->subjects()->attach($subject->id);
 
             if($query){
@@ -89,13 +89,29 @@ class SubjectController extends Controller
         if(!$validator->passes()){
             return response()->json(['code'=>0,'error'=>$validator->errors()->toArray()]);
         }else{
+
+
+            $professor_id = $request->get("professor");
+            $professors = Professor::with('subjects')->where('id', $professor_id)->first();
+
+            $day_of_week = $request->get('day_of_week');
+
             $subject = Subject::find($request->cid);
             $subject->subject_abbreviation = $request->subject_abbreviation;
             $subject->subject_title = $request->subject_title;
             $subject->subject_unit = $request->subject_unit;
             $subject->subject_description = $request->subject_description;
 
+            $subject->day_of_week  = $request->day_of_week ;
+            $subject->start_time = $request->start_time;
+            $subject->end_time = $request->end_time;
+
+            $professors->subjects()->attach($subject);
+
             $query = $subject->save();
+
+            // $query = $professors->subjects()->attach($subject->id);
+
             
             if($query){
                 return response()->json(['code'=>1, 'msg'=>'Subject details have been updated.']);
@@ -109,6 +125,8 @@ class SubjectController extends Controller
         public function deleteSubjectDetails(Request $request){
             $subjectid = $request->id;
             $query = Subject::find($subjectid)->delete();
+
+
     
             if($query){
                 return response()->json(['code'=>1, 'msg'=>'Subject has been deleted from database']);

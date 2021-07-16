@@ -48,4 +48,7 @@ class User extends Authenticatable
             return asset('users/images/no-image.png');
         }
     }
+    public function courses(){
+        return $this->hasMany(Course::class);
+    }
 }

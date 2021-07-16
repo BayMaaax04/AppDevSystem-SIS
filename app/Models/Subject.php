@@ -12,8 +12,13 @@ class Subject extends Model
     protected $fillable = [
         'subject_abbreviation', 'subject_title','subject_description','subject_unit'
     ];
+    protected $with = ['professors'];
 
     public function courses(){
         return $this->belongsToMany(Course::class);
+    }
+
+    public function professors(){
+        return $this->belongsToMany(Professor::class);
     }
 }

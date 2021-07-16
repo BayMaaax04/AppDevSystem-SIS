@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-// use Illuminate\Validation\Validator;
-use Validator;
-use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules\Password;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 use Auth;
+use Validator;
+// use Illuminate\Validation\Validator;
 use App\Models\User;
+use App\Models\Course;
+use App\Models\Subject;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
 {
@@ -23,8 +25,23 @@ class UserController extends Controller
         return view('dashboards.users.profile');
     }
     function registration(){
-        return view('dashboards.users.registration');
+
+        $courses = Course::with('subjects')->latest()->get();
+        return view('dashboards.users.registration', compact('courses'));
     }
+
+    function application(){
+        $courses = Course::with('subjects')->latest()->get();
+        return view('dashboards.users.application', compact('courses'));
+    }
+    function submit_application(Request $request){
+        $subject->subject_abbreviation = $request->subject_abbreviation[$i];
+        $subject->subject_title = $request->subject_title[$i];
+        $subject->subject_unit = $request->subject_unit[$i];
+        $subject->subject_description = $request->subject_description[$i];
+        $subject->subject_description = $request->subject_description[$i];
+    }
+
     function schedule(){
         return view('dashboards.users.schedule');
     }
@@ -172,4 +189,6 @@ class UserController extends Controller
         return redirect()->back()->with('success', 'Password successfully changed!');
 
     }
+
+  
 }

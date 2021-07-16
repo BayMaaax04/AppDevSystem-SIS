@@ -17,10 +17,10 @@
 
         <section class="flex flex-col break-words">
             <div class="lg:mx-20 mx-2 my-2">
-                <div class="mt-16"></div>
+                <div class="mt-14"></div>
 
                 <div class="lg:flex block h-full justify-between">
-                    <div class="intro-y box mt-5 lg:mt-0 px-8 lg:pb-40 lg:flex-3 flex-2 lg:flex block items-center lg:flex-col bg-white dark:bg-gray-primary-dark rounded-md shadow-md border-t-4 border-red-accent lg:mr-5 dark:text-gray-50">
+                    <div class=" intro-y box mt-5 lg:mt-0 px-8 lg:pb-40 lg:flex-3 flex-2 lg:flex block items-center lg:flex-col bg-white dark:bg-gray-primary-dark rounded-md shadow-md border-t-4 border-red-accent lg:mr-5 dark:text-gray-50">
                         <div class="lg:block flex text-center flex-col items-center p-5">
                             <div class="lg:h-40 lg:w-40 md:h-36 md:w-36 h-28 w-28 rounded-full border-1 overflow-hidden border-gray-400 focus:outline-none focus:border-white ">
                                 <img alt="Profile" src="{{ Auth::user()->picture}}" class="h-full w-full object-cover profile-picture" >

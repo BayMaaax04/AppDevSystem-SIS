@@ -15,12 +15,14 @@
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
+        "livewire/livewire": "^2.5",
         "realrashid/sweet-alert": "^4.0",
         "yajra/laravel-datatables-oracle": "~9.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
+        "laracasts/generators": "^2.0",
         "laravel-frontend-presets/tailwindcss": "^4.3",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",

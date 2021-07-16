@@ -1,4 +1,7 @@
 @extends('dashboards.admins.admin_layouts.admin-nav')
+@section('title')
+  PUP Student Portal | Professors  
+@endsection
 
 @section('content')
 <main class="main-panel">

@@ -17,6 +17,7 @@
     <base href="{{ \URL::to('/') }}">
 
     <!-- Styles -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.0.18/sweetalert2.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -31,18 +32,33 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css">
+
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/dataTables.bootstrap.min.css" /> --}}
     @yield('styles')
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <link rel="stylesheet" href="{{ url('css/style.css') }}">
     {{-- <link href="{{ url('plugins/creativeTm/creativeTm.css') }}" rel="stylesheet"> --}}
-
+    <style>
+      .select2-selection__rendered {
+          line-height: 25px !important;
+      }
+      .select2-container .select2-selection--multiple {
+          height: 35px !important;
+      }
+      .select2-selection__arrow {
+          height: 134px !important;
+      }
+        .select2-container--default .select2-results>.select2-results__options{
+            max-height: 500px !important;
+        }
+    </style>
     <script>
       const monthNames = ["January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
       ];
       const d = new Date();
 
+      
     </script>
 
 </head>
@@ -144,7 +160,7 @@
                               </p>
                           </a>
                           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-                              <a class="dropdown-item hover:bg-red-accent w-full" href="#">
+                              {{-- <a class="dropdown-item hover:bg-red-accent w-full" href="#">
                                 <i class="material-icons mr-3" >account_circle</i>
                                 {{ __('Profile') }}
                               </a>
@@ -152,7 +168,7 @@
                                 <i class="material-icons mr-3" >settings</i>
                                 {{ __('Settings') }}
                               </a>
-                              <div class="dropdown-divider"></div>
+                              <div class="dropdown-divider"></div> --}}
 
                               <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                               document.getElementById('logout-form').submit();">
@@ -186,7 +202,8 @@
 <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.print.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <!-- JavaScript Bundle with Popper -->
 
 <script src="https://cdn.datatables.net/1.10.25/js/dataTables.uikit.min.js"></script>
@@ -195,6 +212,7 @@
 <script src="{{ asset('plugins/perfectScrollbar/perfect-scrollbar.jquery.min.js') }}"></script>
 <!-- script -->
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
 
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/dataTables.bootstrap.min.js"></script> --}}
 
